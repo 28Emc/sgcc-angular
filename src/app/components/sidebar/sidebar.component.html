@@ -1,0 +1,50 @@
+<nav #sidebar class="sidebar" [ngClass]="{
+  'close': configS.sidebar.collapsed
+}">
+  <header>
+    <div class="image-text">
+      <span class="image">
+        <img [src]="configS.sidebar.imgSrc" alt="logo">
+      </span>
+      <div class="text logo-text" *ngIf="configS.sidebar.userInfo.visible">
+        <span class="username">{{configS.sidebar.userInfo.username}}</span>
+        <span class="role">{{configS.sidebar.userInfo.role}}</span>
+      </div>
+    </div>
+    <i-tabler name="chevron-right" class='toggle' (click)="onToggleSidebar()"></i-tabler>
+  </header>
+  <div class="menu-bar">
+    <div class="menu">
+      <ul class="menu-links">
+        @for (link of configS.sidebar.links; track $index) {
+        <li class="nav-link">
+          <a [routerLink]="link.url">
+            <i-tabler [name]="link.icon" class='icon'></i-tabler>
+            <span class="text nav-text">{{link.name}}</span>
+          </a>
+        </li>
+        }
+      </ul>
+    </div>
+    <div class="bottom-content">
+      <li>
+        <a href="#">
+          <i-tabler name="logout" class='icon'></i-tabler>
+          <span class="text nav-text">Logout</span>
+        </a>
+      </li>
+
+      <li class="mode">
+        <div class="sun-moon">
+          <i-tabler name="moon" class='icon moon'></i-tabler>
+          <i-tabler name="sun" class='icon sun'></i-tabler>
+        </div>
+        <span class="mode-text text">{{modeText}}</span>
+        <div class="toggle-switch" (click)="onToggleSwitch()">
+          <span class="switch"></span>
+        </div>
+      </li>
+
+    </div>
+  </div>
+</nav>

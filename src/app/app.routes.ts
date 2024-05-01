@@ -1,3 +1,35 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  {
+    path: '',
+    loadComponent: () => import('./layouts/default/default.component').then((c) => c.DefaultComponent),
+    // canActivate: [authGuard],
+    children: [
+      {
+        path: 'dashboard',
+        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+      },
+      //? AQUÍ SE DEFINE EL ENRUTAMIENTO DE LOS DISTNTOS COMPONENTES DEL SISTEMA
+      {
+        path: '',
+        redirectTo: '/dashboard',
+        pathMatch: 'full',
+      }
+    ]
+  },
+  {
+    path: 'auth/login',
+    loadComponent: () => import('./pages/authentication/login/login.component').then((c) => c.LoginComponent),
+  },
+  {
+    path: 'auth/redirect',
+    loadComponent: () => import('./pages/authentication/redirect/redirect.component').then((c) => c.RedirectComponent),
+  },
+  {
+    path: '**',
+    redirectTo: '/auth/login',
+    pathMatch: 'full'
+  }
+];
