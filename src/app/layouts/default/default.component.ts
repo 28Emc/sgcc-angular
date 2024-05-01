@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-default',
@@ -10,6 +11,7 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
     CommonModule,
     RouterModule,
     SidebarComponent,
+    NavbarComponent
   ],
   templateUrl: './default.component.html',
   styleUrl: './default.component.scss'
@@ -19,13 +21,11 @@ export class DefaultComponent {
 
   onToggleSidebar(eventToggle: boolean): void {
     if (eventToggle) {
-      this.main.nativeElement.style.left = '78px';
-      this.main.nativeElement.style.height = '100vh';
-      this.main.nativeElement.style.width = 'calc(100% - 78px)';
+      this.main.nativeElement.classList.remove('left-[250px]', 'h-screen', 'w-[calc(100%-250px)]');
+      this.main.nativeElement.classList.add('left-[88px]', 'h-screen', 'w-[calc(100%-88px)]');
     } else {
-      this.main.nativeElement.style.left = '250px';
-      this.main.nativeElement.style.height = '100vh';
-      this.main.nativeElement.style.width = 'calc(100% - 250px)';
+      this.main.nativeElement.classList.remove('left-[88px]', 'h-screen', 'w-[calc(100%-88px)]');
+      this.main.nativeElement.classList.add('left-[250px]', 'h-screen', 'w-[calc(100%-250px)]');
     }
   }
 }

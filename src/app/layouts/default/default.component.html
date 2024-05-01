@@ -1,7 +1,11 @@
 <app-sidebar (toggleSidebar)="onToggleSidebar($event)"></app-sidebar>
 
-<section #main class="home">
-  <div class="content">
-    <router-outlet />
+<section #main class="absolute top-0 bg-body-light dark:bg-body-dark transition-all">
+  <div class="flex flex-col gap-2 w-full sm:px-16 px-1 sm:py-4 py-1">
+    <app-navbar></app-navbar>
+    <div
+      class="p-5 text-typography-default dark:text-typography-dark border border-blue-400 rounded-md h-[calc(100vh-106px)]">
+      <router-outlet />
+    </div>
   </div>
 </section>

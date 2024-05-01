@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { LayoutService } from '../../services/layout.service';
 import { LayoutConfig } from '../../interfaces/ILayoutConfig.interface';
+import { SidebarItemComponent } from './sidebar-item/sidebar-item.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,7 +12,8 @@ import { LayoutConfig } from '../../interfaces/ILayoutConfig.interface';
   imports: [
     CommonModule,
     RouterModule,
-    TablerIconsModule
+    TablerIconsModule,
+    SidebarItemComponent
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'

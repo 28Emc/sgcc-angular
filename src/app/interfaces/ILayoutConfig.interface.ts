@@ -2,7 +2,7 @@ export interface ILayoutConfig {
   sidebar: ISidebar;
 }
 
-interface ISidebar {
+export interface ISidebar {
   imgSrc: string;
   collapsed: boolean;
   darkMode: boolean;
@@ -10,19 +10,19 @@ interface ISidebar {
   links: ILink[];
 }
 
-interface IUserInfo {
+export interface IUserInfo {
   visible: boolean;
   username: string;
   role: string;
 }
 
-class UserInfo implements IUserInfo {
+export class UserInfo implements IUserInfo {
   visible: boolean = true;
   username: string = '';
   role: string = '';
 }
 
-class Sidebar implements ISidebar {
+export class Sidebar implements ISidebar {
   imgSrc: string = '';
   collapsed: boolean = false;
   darkMode: boolean = false;
@@ -34,13 +34,13 @@ class Sidebar implements ISidebar {
   links: Link[] = [];
 }
 
-interface ILink {
+export interface ILink {
   name: string;
   icon: string;
   url: string;
 }
 
-class Link implements ILink {
+export class Link implements ILink {
   name: string = '';
   icon: string = '';
   url: string = '';

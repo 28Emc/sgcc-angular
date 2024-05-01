@@ -1,50 +1,78 @@
-<nav #sidebar class="sidebar" [ngClass]="{
-  'close': configS.sidebar.collapsed
+<nav #sidebar
+  class="bg-sidebar-light dark:bg-sidebar-dark transition-all fixed top-0 left-0 h-full py-[10px] px-[14px] z-[100]"
+  [ngClass]="{
+  'w-[250px]': !configS.sidebar.collapsed,
+  'w-[88px]': configS.sidebar.collapsed,
 }">
-  <header>
-    <div class="image-text">
-      <span class="image">
-        <img [src]="configS.sidebar.imgSrc" alt="logo">
+  <header class="relative">
+    <div class="flex items-center px-2 mt-2" [ngClass]="{
+      'gap-2': !configS.sidebar.collapsed,
+      'gap-0': configS.sidebar.collapsed,
+    }">
+      <span class="flex items-center justify-center min-w-[40px] rounded-md">
+        <img class="w-[40px] rounded-md" [src]="configS.sidebar.imgSrc" alt="logo">
       </span>
-      <div class="text logo-text" *ngIf="configS.sidebar.userInfo.visible">
-        <span class="username">{{configS.sidebar.userInfo.username}}</span>
-        <span class="role">{{configS.sidebar.userInfo.role}}</span>
+      <div class="flex flex-col text-[17px] font-normal whitespace-nowrap" [ngClass]="{
+      'opacity-100 transition-all': !configS.sidebar.collapsed,
+      'opacity-0 transition-all': configS.sidebar.collapsed
+      }" *ngIf="configS.sidebar.userInfo.visible">
+        <span
+          class="text-typography-default dark:text-typography-dark transition-all mt-[2px] text-[13px] font-semibold">{{configS.sidebar.userInfo.username}}</span>
+        <span
+          class="text-typography-default dark:text-typography-dark transition-all text-[13px] -mt-[2px] block">{{configS.sidebar.userInfo.role}}</span>
       </div>
     </div>
-    <i-tabler name="chevron-right" class='toggle' (click)="onToggleSidebar()"></i-tabler>
+    <i-tabler name="chevron-right"
+      class='bg-primary-dark hover:bg-primary-light text-white dark:bg-primary-dark dark:hover:bg-primary-light transition-all absolute top-1/2 -right-[25px] h-[25px] w-[25px] rounded-[50%] flex items-center justify-center text-[22px] cursor-pointer'
+      (click)="onToggleSidebar()" [ngClass]="{
+      '-translate-y-1/2 rotate-180': !configS.sidebar.collapsed,
+      '-translate-y-1/2 rotate-0': configS.sidebar.collapsed
+    }"></i-tabler>
   </header>
-  <div class="menu-bar">
-    <div class="menu">
-      <ul class="menu-links">
+  <div class="menu-bar h-[calc(100%-55px)] flex flex-col justify-between overflow-y-scroll">
+    <div class="mt-5">
+      <ul>
         @for (link of configS.sidebar.links; track $index) {
-        <li class="nav-link">
-          <a [routerLink]="link.url">
-            <i-tabler [name]="link.icon" class='icon'></i-tabler>
-            <span class="text nav-text">{{link.name}}</span>
-          </a>
-        </li>
+        <app-sidebar-item [link]="link"></app-sidebar-item>
         }
       </ul>
     </div>
-    <div class="bottom-content">
-      <li>
-        <a href="#">
-          <i-tabler name="logout" class='icon'></i-tabler>
-          <span class="text nav-text">Logout</span>
+    <div>
+      <li class="h-[50px] list-none flex items-center mt-[10px] group">
+        <a routerLink="/auth/login"
+          class="list-none bg-transparent group-hover:bg-primary-light transition-all flex items-center justify-start pl-[15px] h-full w-full rounded-md no-underline"
+          [ngClass]="{
+            'gap-[10px]': !configS.sidebar.collapsed,
+            'gap-0': configS.sidebar.collapsed,
+          }">
+          <i-tabler name="logout"
+            class='text-typography-default dark:text-typography-dark group-hover:text-typography-light transition-all min-w-[25px] rounded-md h-full flex items-center justify-center text-[25px]'></i-tabler>
+          <span
+            class="text-typography-default dark:text-typography-dark group-hover:text-typography-light transition-all text-[17px] font-normal whitespace-nowrap"
+            [ngClass]="{
+            'opacity-100': !configS.sidebar.collapsed,
+            'opacity-0': configS.sidebar.collapsed
+            }">Logout</span>
         </a>
       </li>
 
-      <li class="mode">
-        <div class="sun-moon">
-          <i-tabler name="moon" class='icon moon'></i-tabler>
-          <i-tabler name="sun" class='icon sun'></i-tabler>
+      <li (click)="onToggleSwitch()" class="flex items-center rounded-md pl-[15px] transition-all w-full h-[50px] list-none mt-[10px] cursor-pointer
+        bg-transparent hover:bg-gray-700 dark:hover:bg-gray-500 hover:text-white group" [ngClass]="{
+          'gap-[10px]': !configS.sidebar.collapsed,
+          'gap-0': configS.sidebar.collapsed,
+        }">
+        <div>
+          @if (!configS.sidebar.darkMode) {
+          <i-tabler name="moon" class='text-gray-500 group-hover:text-white'></i-tabler>
+          } @else {
+          <i-tabler name="sun" class='text-gray-500 dark:text-yellow-400'></i-tabler>
+          }
         </div>
-        <span class="mode-text text">{{modeText}}</span>
-        <div class="toggle-switch" (click)="onToggleSwitch()">
-          <span class="switch"></span>
-        </div>
+        <span class="text-gray-500 dark:text-gray-300 group-hover:text-white" [ngClass]="{
+          'opacity-100 transition-all': !configS.sidebar.collapsed,
+          'opacity-0 transition-all': configS.sidebar.collapsed
+        }">{{modeText}}</span>
       </li>
-
     </div>
   </div>
 </nav>
