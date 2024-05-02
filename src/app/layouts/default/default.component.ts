@@ -22,9 +22,9 @@ export class DefaultComponent {
   onToggleSidebar(eventToggle: boolean): void {
     if (eventToggle) {
       this.main.nativeElement.classList.remove('left-[250px]', 'h-screen', 'w-[calc(100%-250px)]');
-      this.main.nativeElement.classList.add('left-[88px]', 'h-screen', 'w-[calc(100%-88px)]');
+      this.main.nativeElement.classList.add('left-[75px]', 'h-screen', 'w-[calc(100%-75px)]');
     } else {
-      this.main.nativeElement.classList.remove('left-[88px]', 'h-screen', 'w-[calc(100%-88px)]');
+      this.main.nativeElement.classList.remove('left-[75px]', 'h-screen', 'w-[calc(100%-75px)]');
       this.main.nativeElement.classList.add('left-[250px]', 'h-screen', 'w-[calc(100%-250px)]');
     }
   }

@@ -164,22 +164,26 @@ module.exports = {
       rose: colors.rose,
       'primary': {
         'light': colors.orange[400],
-        'dark': '#3a3b3c'
+        'dark': '#3A3B3C'
       },
       'title': {
         'light': '#707070',
-        'dark': '#ccc'
+        'dark': '#CCC'
       },
       'typography': {
         'light': '#F6F5FF',
         'default': '#707070',
-        'dark': '#ccc'
+        'dark': '#CCC'
       },
       'body': {
-        'light': '#E4E9F7',
-        'dark': '#18191a'
+        'light': '#F6F6F6',
+        'dark': '#18191A'
       },
       'sidebar': {
+        'light': '#FFF',
+        'dark': '#242526'
+      },
+      'content': {
         'light': '#FFF',
         'dark': '#242526'
       }

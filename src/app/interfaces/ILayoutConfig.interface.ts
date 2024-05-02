@@ -75,6 +75,11 @@ export const defaultConfig: LayoutConfig = {
         name: 'Dashboard',
         icon: 'layout-dashboard',
         url: '/dashboard'
+      },
+      {
+        name: 'Test',
+        icon: 'home',
+        url: '/test'
       }
     ]
   }

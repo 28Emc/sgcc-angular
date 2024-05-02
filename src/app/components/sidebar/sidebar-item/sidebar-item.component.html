@@ -1,17 +1,18 @@
-<li class="h-[50px] list-none flex items-center mt-[10px] group">
-  <a [routerLink]="link.url"
-    class="list-none bg-transparent group-hover:bg-primary-light transition-all flex items-center justify-start pl-[15px] h-full w-full rounded-md no-underline"
-    [ngClass]="{
-      'gap-[10px]': !configS.sidebar.collapsed,
-      'gap-0': configS.sidebar.collapsed,
+<li class="h-[45px] list-none flex items-center mt-[5px] group">
+  <a [routerLink]="link.url" routerLinkActive="bg-primary-light" class="list-none group-hover:bg-primary-light transition-all
+    flex items-center justify-start h-full w-full rounded-md no-underline" [ngClass]="{
+      'gap-[10px] pl-[15px]': !configS.sidebar.collapsed,
+      'gap-0 pl-[10px]': configS.sidebar.collapsed,
     }">
-    <i-tabler [name]="link.icon"
-      class='text-typography-default dark:text-typography-dark group-hover:text-typography-light transition-all min-w-[25px] rounded-md h-full flex items-center justify-center text-[25px]'></i-tabler>
-    <span
-      class="text-typography-default dark:text-typography-dark group-hover:text-typography-light transition-all text-[17px] font-normal whitespace-nowrap"
-      [ngClass]="{
-      'opacity-100': !configS.sidebar.collapsed,
-      'opacity-0': configS.sidebar.collapsed
+    <i-tabler [name]="link.icon" class='text-typography-default dark:text-typography-light group-hover:text-typography-light
+     transition-all min-w-[25px] font-light rounded-md h-full flex items-center justify-center text-[25px]' [ngClass]="{
+      'group-hover:translate-x-1': !configS.sidebar.collapsed,
+      'group-hover:translate-x-0': configS.sidebar.collapsed,
+    }" routerLinkActive="text-typography-light"></i-tabler>
+    <span class="text-typography-default dark:text-typography-light group-hover:text-typography-light transition-all
+      text-[17px] font-light whitespace-nowrap" routerLinkActive="text-typography-light" [ngClass]="{
+      'block group-hover:translate-x-1': !configS.sidebar.collapsed,
+      'hidden group-hover:translate-x-0': configS.sidebar.collapsed
       }">{{link.name}}</span>
   </a>
 </li>
