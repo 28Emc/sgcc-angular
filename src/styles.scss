@@ -16,6 +16,7 @@
 }
 
 /* ===== Sidebar ===== */
-.menu-bar::-webkit-scrollbar {
+.menu-bar::-webkit-scrollbar,
+.notificacion-content::-webkit-scrollbar {
   display: none;
 }

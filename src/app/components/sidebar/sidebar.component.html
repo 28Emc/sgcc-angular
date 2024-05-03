@@ -3,7 +3,7 @@
   [ngClass]="{
   'w-[250px] md:opacity-100 opacity-0': !configS.sidebar.collapsed && !isXSmallS(),
   'w-[75px] md:opacity-100 opacity-0': configS.sidebar.collapsed && !isXSmallS(),
-  'w-[250px] z-100': !configS.sidebar.collapsed && isXSmallS(),
+  'w-[250px] z-100': !configS.sidebar.collapsed && isXSmallS() || !configS.sidebar.collapsed && !isXSmallS(),
   'w-0 z-0': configS.sidebar.collapsed && isXSmallS(),
 }">
   <header class="relative">
@@ -43,7 +43,7 @@
         }
       </ul>
     </div>
-    <div>
+    <!-- <div>
       <li class="h-[45px] list-none flex items-center mt-[5px] group">
         <a routerLink="/auth/login"
           class="list-none bg-transparent group-hover:bg-primary-light transition-all flex items-center justify-start h-full w-full rounded-md no-underline"
@@ -88,6 +88,6 @@
           'hidden group-hover:translate-x-0': configS.sidebar.collapsed
         }">{{modeText}}</span>
       </li>
-    </div>
+    </div> -->
   </div>
 </nav>
