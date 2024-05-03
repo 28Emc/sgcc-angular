@@ -1,21 +1,25 @@
 <nav #sidebar
-  class="bg-sidebar-light dark:bg-sidebar-dark transition-all fixed top-0 left-0 h-full py-[10px] px-[14px] z-[100] items-center shadow"
+  class="bg-sidebar-light dark:bg-sidebar-dark transition-all fixed top-0 left-0 h-full z-[100] items-center shadow-sm py-[10px] px-[14px]"
   [ngClass]="{
-  'w-[250px]': !configS.sidebar.collapsed,
-  'w-[75px]': configS.sidebar.collapsed,
+  'w-[250px] md:opacity-100 opacity-0': !configS.sidebar.collapsed && !isXSmallS(),
+  'w-[75px] md:opacity-100 opacity-0': configS.sidebar.collapsed && !isXSmallS(),
+  'w-[250px] z-100': !configS.sidebar.collapsed && isXSmallS(),
+  'w-0 z-0': configS.sidebar.collapsed && isXSmallS(),
 }">
   <header class="relative">
     <div class="flex items-center" [ngClass]="{
       'gap-2 px-2': !configS.sidebar.collapsed,
       'gap-0': configS.sidebar.collapsed,
     }">
-      <span class="flex items-center justify-center min-w-[47px] rounded-md">
+      <span class="flex items-center justify-center min-w-[47px] rounded-md" [ngClass]="{
+        'block': isXSmallS() && configS.sidebar.collapsed || !isXSmallS() && !configS.sidebar.collapsed,
+      }">
         <img class="w-[47px] h-[47px] rounded-md" [src]="configS.sidebar.imgSrc" alt="logo">
       </span>
       <div class="flex flex-col items-start text-[17px] font-normal whitespace-nowrap transition-all" [ngClass]="{
       'block': !configS.sidebar.collapsed,
       'hidden': configS.sidebar.collapsed
-      }" *ngIf="configS.sidebar.userInfo.visible">
+    }" *ngIf="configS.sidebar.userInfo.visible">
         <span
           class="text-typography-default dark:text-typography-dark transition-all mt-[2px] text-[13px] font-semibold">{{configS.sidebar.userInfo.username}}</span>
         <span
@@ -23,10 +27,12 @@
       </div>
     </div>
     <i-tabler name="chevron-right"
-      class='bg-primary-dark hover:bg-primary-light text-white dark:bg-primary-dark dark:hover:bg-primary-light hover:scale-125 transition-all absolute -right-[25px] h-[25px] w-[25px] rounded-[50%] flex items-center justify-center text-[22px] cursor-pointer'
-      (click)="onToggleSidebar()" [ngClass]="{
+      class='bg-primary-dark hover:bg-primary-light text-white dark:bg-primary-dark dark:hover:bg-primary-light hover:scale-110 transition-all absolute -right-[25px] h-[25px] w-[25px] rounded-[50%] flex items-center justify-center text-[22px] cursor-pointer'
+      (click)="!isXSmallS() ? onToggleSidebar() : onToggleSidebarMobile()" [ngClass]="{
       'rotate-180': !configS.sidebar.collapsed,
-      'rotate-0': configS.sidebar.collapsed
+      'rotate-0': configS.sidebar.collapsed,
+      'hidden': !configS.sidebar.collapsed && isXSmallS() || configS.sidebar.collapsed && !isXSmallS(),
+      'block': configS.sidebar.collapsed && isXSmallS() || !configS.sidebar.collapsed && !isXSmallS(),
     }"></i-tabler>
   </header>
   <div class="menu-bar h-[calc(100%-55px)] flex flex-col justify-between overflow-y-scroll">

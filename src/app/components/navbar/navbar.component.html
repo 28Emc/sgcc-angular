@@ -1,4 +1,14 @@
 <section
-  class="rounded-md p-5 bg-content-light dark:bg-content-dark text-typography-default dark:text-typography-dark shadow-lg dark:shadow-sm shadow-gray-200 dark:shadow-gray-800 transition-all">
-  <p>navbar works!</p>
+  class="flex items-center rounded-md p-4 bg-content-light dark:bg-content-dark text-typography-default dark:text-typography-dark shadow-lg dark:shadow-sm shadow-gray-200 dark:shadow-gray-800 transition-all min-h-[25px]">
+
+  <a id="menu-mobile-btn" class="md:hidden block" (click)="onToggleSidebar()">
+    <i-tabler name="menu-2"
+      class='min-w-[25px] rounded-sm text-typography-default group-hover:text-typography-default dark:text-typography-dark group-hover:dark:text-typography-light transition-all cursor-pointer'></i-tabler>
+  </a>
+
+  <!-- <a id="dark-mode-btn" (click)="onToggleDarkMode()">
+    <i-tabler name="menu-2"
+      class='min-w-[25px] rounded-sm text-typography-default group-hover:text-typography-default dark:text-typography-dark group-hover:dark:text-typography-light transition-all cursor-pointer'></i-tabler>
+  </a> -->
+
 </section>
