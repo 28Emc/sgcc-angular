@@ -163,6 +163,8 @@ module.exports = {
       pink: colors.pink,
       rose: colors.rose,
       'primary': {
+        '50': colors.orange[50],
+        '200': colors.orange[200],
         'light': colors.orange[400],
         'dark': '#3A3B3C'
       },
@@ -1087,6 +1089,8 @@ module.exports = {
       50: '50',
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-animated')
+  ],
 }
 

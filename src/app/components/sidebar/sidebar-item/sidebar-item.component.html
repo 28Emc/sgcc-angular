@@ -1,18 +1,104 @@
-<li class="h-[45px] list-none flex items-center mt-[5px] group">
-  <a [routerLink]="link.url" routerLinkActive="bg-primary-light" class="list-none group-hover:bg-primary-light transition-all
-    flex items-center justify-start h-full w-full rounded-md no-underline" [ngClass]="{
-      'gap-[10px] pl-[15px]': !configS.sidebar.collapsed,
-      'gap-0 pl-[10px]': configS.sidebar.collapsed,
-    }">
-    <i-tabler [name]="link.icon" class='text-typography-default dark:text-typography-light group-hover:text-typography-light
-     transition-all min-w-[25px] font-light rounded-md h-full flex items-center justify-center text-[25px]' [ngClass]="{
-      'group-hover:translate-x-1': !configS.sidebar.collapsed,
-      'group-hover:translate-x-0': configS.sidebar.collapsed,
-    }" routerLinkActive="text-typography-light"></i-tabler>
-    <span class="text-typography-default dark:text-typography-light group-hover:text-typography-light transition-all
-      text-[17px] font-light whitespace-nowrap" routerLinkActive="text-typography-light" [ngClass]="{
-      'block group-hover:translate-x-1': !configS.sidebar.collapsed,
-      'hidden group-hover:translate-x-0': configS.sidebar.collapsed
-      }">{{link.name}}</span>
+@switch (link.type) {
+@case ('title') {
+<li class="h-[45px] list-none flex items-center group">
+  <a class="list-none transition-all pointer-events-none
+        flex items-center h-full w-full rounded-md no-underline" [ngClass]="{
+          'gap-[10px] pl-[15px] justify-start': !configS.sidebar.collapsed,
+          'gap-0 justify-center': configS.sidebar.collapsed,
+        }">
+    <span
+      class="text-primary-light dark:text-typography-light transition-all font-medium whitespace-nowrap text-[15px]">
+      {{(configS.sidebar.collapsed ? '...' : displayTitleName(link)) | uppercase}}
+    </span>
   </a>
 </li>
+@for (child of link.children; track $index) {
+<app-sidebar-item [link]="child"></app-sidebar-item>
+}
+}
+@case ('dropdown') {
+<li class="h-[45px] list-none flex items-center my-1 group" (click)="onClickChild(link)">
+  <a id="dropdown-a" routerLinkActive="bg-primary-light" class="list-none group-hover:bg-primary-light transition-all
+          flex items-center justify-start h-full w-full rounded-md no-underline cursor-pointer {{customCss.join('')}}"
+    [ngClass]="{
+            'gap-[10px] pl-[15px]': !configS.sidebar.collapsed,
+            'gap-0 pl-[13px]': configS.sidebar.collapsed,
+          }">
+    @if (link.deep && link.deep <= 1) { <i-tabler [name]="link.icon!"
+      class='text-typography-default dark:text-typography-light group-hover:text-typography-light
+                     transition-all min-w-[20px] font-light rounded-md h-full flex items-center justify-center text-[20px]'></i-tabler>
+      }
+      <div class="flex justify-between w-full pr-1">
+        <span
+          class="text-typography-default dark:text-typography-light group-hover:text-typography-light transition-all text-[15px] font-light whitespace-nowrap"
+          routerLinkActive="text-typography-light" [ngClass]="{
+              'block': !configS.sidebar.collapsed,
+              'hidden': configS.sidebar.collapsed
+              }">{{displayLinkName(link)}}</span>
+        @if (!configS.sidebar.collapsed) {
+        <i-tabler [name]="link.isOpen ? 'chevron-up' : 'chevron-down'" class='text-typography-default dark:text-typography-light group-hover:text-typography-light
+             transition-all font-light rounded-md h-full flex items-center justify-center text-[10px] cursor-pointer'
+          routerLinkActive="text-typography-light"></i-tabler>
+        }
+      </div>
+  </a>
+</li>
+
+@if (link.children) {
+
+@for (child1st of link.children; track $index) {
+
+@if (link.isOpen) {
+<app-sidebar-item [link]="child1st" [showIcon]="false" [customCss]="['bg-primary-100']" [ngClass]="{
+    'block animate-fade animate-once animate-duration-300': link.isOpen,
+    'hidden': !link.isOpen,
+  }"></app-sidebar-item>
+}
+
+@if (child1st.children) {
+
+@for (child2nd of child1st.children; track $index) {
+
+@if (child2nd.isOpen) {
+<app-sidebar-item [link]="child2nd" [showIcon]="false" [customCss]="['bg-primary-50']" [ngClass]="{
+      'block animate-fade animate-once animate-duration-300': child2nd.isOpen,
+      'hidden': !child2nd.isOpen,
+    }"></app-sidebar-item>
+}
+
+}
+
+}
+
+}
+
+}
+
+}
+@case ('link') {
+<li class="h-[45px] list-none flex items-center my-1 group transition-all">
+  <a id="link-a" [routerLink]="link.url" routerLinkActive="bg-primary-light" class="list-none group-hover:bg-primary-light transition-all
+      flex items-center justify-start h-full w-full rounded-md no-underline {{customCss.join('')}}" [ngClass]="{
+        'gap-[10px] pl-[15px]': !configS.sidebar.collapsed,
+        'gap-0 pl-[10px]': configS.sidebar.collapsed,
+      }">
+    @if (showIcon) {
+    <i-tabler [name]="link.icon!" class='text-typography-default dark:text-typography-light group-hover:text-typography-light
+       transition-all min-w-[20px] font-light rounded-md h-full flex items-center justify-center text-[20px]'
+      [ngClass]="{
+        'group-hover:translate-x-1': !configS.sidebar.collapsed,
+        'group-hover:translate-x-0': configS.sidebar.collapsed,
+      }" routerLinkActive="text-typography-light"></i-tabler>
+    }
+    <span class="text-typography-default dark:text-typography-light group-hover:text-typography-light transition-all
+        font-light whitespace-nowrap" routerLinkActive="text-typography-light" [ngClass]="{
+        'block group-hover:translate-x-1': !configS.sidebar.collapsed,
+        'hidden group-hover:translate-x-0': configS.sidebar.collapsed,
+        'text-[15px]' : showIcon,
+        'text-[13px] text-wrap' : !showIcon,
+        }">{{displayLinkName(link)}}</span>
+  </a>
+</li>
+}
+@default {}
+}

@@ -11,6 +11,34 @@ export const routes: Routes = [
         path: 'dashboard',
         loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
       },
+      {
+        path: 'housings',
+        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+      },
+      {
+        path: 'rooms',
+        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+      },
+      {
+        path: 'tenants',
+        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+      },
+      {
+        path: 'receipts',
+        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+      },
+      {
+        path: 'measuring-devices',
+        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+      },
+      {
+        path: 'measuring-device-readings',
+        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+      },
+      {
+        path: 'calculations',
+        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+      },
       //? AQUÍ SE DEFINE EL ENRUTAMIENTO DE LOS DISTNTOS COMPONENTES DEL SISTEMA
       {
         path: '',
