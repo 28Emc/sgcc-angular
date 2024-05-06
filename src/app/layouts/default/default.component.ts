@@ -21,7 +21,32 @@ import { LayoutService } from '../../services/layout.service';
   styleUrl: './default.component.scss'
 })
 export class DefaultComponent implements OnInit, AfterViewInit {
-  @ViewChild('main') main!: ElementRef;
+  @ViewChild('sidebar', { static: false }) sidebar!: ElementRef<HTMLElement>;
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private destroyRef: DestroyRef,
+  ) { }
+
+  ngOnInit(): void { }
+
+  ngAfterViewInit(): void { }
+
+  onToggleSidebar(): void {
+    this.sidebar.nativeElement.classList.toggle('open');
+  }
+
+
+
+
+
+
+
+
+
+
+
+  /* @ViewChild('main') main!: ElementRef;
   layoutService: LayoutService = inject(LayoutService);
   configS: LayoutConfig = this.layoutService.configS();
   isXSmallS = signal<boolean>(false);
@@ -89,5 +114,5 @@ export class DefaultComponent implements OnInit, AfterViewInit {
       this.main.nativeElement.classList.remove('brightness-100', 'z-0');
       this.main.nativeElement.classList.add('brightness-50');
     }
-  }
+  } */
 }
