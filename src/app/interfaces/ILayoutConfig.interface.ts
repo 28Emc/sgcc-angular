@@ -1,33 +1,39 @@
 export interface ILayoutConfig {
+  darkMode: boolean;
   sidebar: ISidebar;
 }
 
 export interface ISidebar {
+  title: string;
   imgSrc: string;
+  search: boolean;
   collapsed: boolean;
-  darkMode: boolean;
   userInfo: IUserInfo;
   links: ILink[];
 }
 
 export interface IUserInfo {
   visible: boolean;
+  avatar: string;
   username: string;
   role: string;
 }
 
 export class UserInfo implements IUserInfo {
   visible: boolean = true;
+  avatar: string = 'admin@email.com';
   username: string = '';
   role: string = '';
 }
 
 export class Sidebar implements ISidebar {
+  title: string = '';
   imgSrc: string = '';
+  search: boolean = false;
   collapsed: boolean = false;
-  darkMode: boolean = false;
   userInfo: UserInfo = {
     visible: false,
+    avatar: '',
     username: '',
     role: ''
   };
@@ -90,12 +96,15 @@ export class DefaultLink implements ILink {
 }
 
 export class LayoutConfig implements ILayoutConfig {
+  darkMode: boolean = false;
   sidebar: Sidebar = {
+    title: '',
     imgSrc: '',
+    search: false,
     collapsed: false,
-    darkMode: false,
     userInfo: {
       visible: false,
+      avatar: '',
       username: '',
       role: ''
     },
@@ -104,15 +113,18 @@ export class LayoutConfig implements ILayoutConfig {
 }
 
 export const defaultConfig: LayoutConfig = {
+  darkMode: false,
   sidebar: {
+    title: 'SGCC',
     imgSrc: 'assets/img/logo_1.webp',
+    search: true,
     collapsed: false,
     userInfo: {
       visible: true,
+      avatar: 'https://picsum.photos/200',
       username: 'admin@email.com',
       role: 'Admin'
     },
-    darkMode: false,
     links: [
       {
         id: 1,
@@ -120,7 +132,72 @@ export const defaultConfig: LayoutConfig = {
         type: 'link',
         name: 'Dashboard',
         displayName: 'Dashboard',
-        icon: 'layout-dashboard',
+        icon: 'bxs-dashboard',
+        url: '/dashboard'
+      },
+      {
+        id: 2,
+        parentId: 0,
+        type: 'link',
+        name: 'Housings',
+        displayName: 'Housings',
+        icon: 'bxs-building-house',
+        url: '/housings'
+      },
+      {
+        id: 3,
+        parentId: 0,
+        type: 'link',
+        name: 'Rooms',
+        displayName: 'Rooms',
+        icon: 'bxs-door-open',
+        url: '/rooms'
+      },
+      {
+        id: 4,
+        parentId: 0,
+        type: 'link',
+        name: 'Tenants',
+        displayName: 'Tenants',
+        icon: 'bxs-group',
+        url: '/tenants'
+      },
+      {
+        id: 5,
+        parentId: 0,
+        type: 'link',
+        name: 'Measuring Devices',
+        displayName: 'Measuring Devices',
+        icon: 'bxs-food-menu',
+        url: '/measuring-devices'
+      },
+      {
+        id: 6,
+        parentId: 0,
+        type: 'link',
+        name: 'Measuring Device Readings',
+        displayName: 'Readings',
+        icon: 'bx-poll',
+        url: '/measuring-device-readings'
+      },
+      {
+        id: 7,
+        parentId: 0,
+        type: 'link',
+        name: 'Tenant Calculations',
+        displayName: 'Calculations',
+        icon: 'bxs-calculator',
+        url: '/calculations',
+      }
+    ]
+    /* links: [
+      {
+        id: 1,
+        parentId: 0,
+        type: 'link',
+        name: 'Dashboard',
+        displayName: 'Dashboard',
+        icon: 'bxs-dashboard',
         url: '/dashboard'
       },
       {
@@ -240,6 +317,6 @@ export const defaultConfig: LayoutConfig = {
           }
         ]
       }
-    ]
+    ] */
   }
 };

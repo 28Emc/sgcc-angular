@@ -21,19 +21,37 @@ import { LayoutService } from '../../services/layout.service';
   styleUrl: './default.component.scss'
 })
 export class DefaultComponent implements OnInit, AfterViewInit {
-  @ViewChild('sidebar', { static: false }) sidebar!: ElementRef<HTMLElement>;
+  @ViewChild('sidebar', { static: true }) sidebar!: ElementRef<HTMLElement>;
+  layoutService: LayoutService = inject(LayoutService);
+  configS: LayoutConfig = this.layoutService.configS();
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private destroyRef: DestroyRef,
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if (this.configS.darkMode) {
+      document.body.classList.toggle('dark');
+    }
+    if (this.configS.sidebar.collapsed) {
+      this.sidebar.nativeElement.classList.toggle('open');
+    }
+  }
 
   ngAfterViewInit(): void { }
 
   onToggleSidebar(): void {
     this.sidebar.nativeElement.classList.toggle('open');
+    this.configS.sidebar.collapsed = !this.configS.sidebar.collapsed;
+    this.layoutService.persistConfig(this.configS);
+  }
+
+  onToggleDarkMode(): void {
+    document.body.classList.toggle('dark');
+    this.configS.darkMode = !this.configS.darkMode;
+    console.log('this.configS.darkMode', this.configS.darkMode)
+    this.layoutService.persistConfig(this.configS);
   }
 
 

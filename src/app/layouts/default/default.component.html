@@ -1,89 +1,85 @@
-<div #sidebar class="sidebar">
-  <div class="logo-details">
-    <i class='bx bxl-c-plus-plus icon'></i>
-    <div class="logo_name">CodingLab</div>
-    <i #btn class='bx ' [ngClass]="{
+<div #sidebar class="sidebar    fixed left-0 top-0 h-full w-20 py-1.5 px-3.5 z-[99]" [ngClass]="{
+  'open': !configS.sidebar.collapsed
+}">
+
+  <div class="logo-details    flex items-center relative h-[60px]">
+    <i class='bx bxl-c-plus-plus icon    text-center text-[28px] text-white rounded-xl min-w-[50px] h-[60px]'></i>
+    <div class="logo_name    text-white font-semibold text-[20px]">
+      {{configS.sidebar.title}}
+    </div>
+    <i #btn
+      class='    absolute top-1/2 right-0 text-center cursor-pointer text-[22px] text-white min-w-[50px] h-[60px] bx'
+      [ngClass]="{
       'bx-menu-alt-right': sidebar.classList.contains('open'),
       'bx-menu': !sidebar.classList.contains('open'),
     }" id="btn" (click)="onToggleSidebar()" (keypress)="$event.preventDefault()"></i>
   </div>
-  <ul class="nav-list">
-    <li>
-      <i class='bx bx-search' (click)="onToggleSidebar()" (keypress)="$event.preventDefault()"></i>
-      <input type="text" placeholder="Search...">
-      <span class="tooltip">Search</span>
+
+  <ul class="nav-list    mt-5 h-full">
+
+    @if (configS.sidebar.search) {
+    <li class="    relative my-2 mx-0 list-none">
+      <i class='bx bx-search    absolute top-1/2 left-0 text-center text-[22px] bg-[#1d1b31] hover:bg-white text-white hover:text-[#1d1b31] rounded-xl min-w-[50px] h-[60px]'
+        (click)="onToggleSidebar()" (keypress)="$event.preventDefault()"></i>
+      <input
+        class="    text-white bg-[#1d1b31] font-normal text-[15px] w-full rounded-xl outline-none h-[50px] border-none"
+        type="text" placeholder="Search...">
+      <span
+        class="tooltip    absolute -top-5 px-3 py-1.5 rounded font-normal opacity-0 whitespace-nowrap pointer-events-none bg-white text-[15px] z-[3] block max-xs:hidden">
+        Search
+      </span>
     </li>
-    <li>
-      <a href="#">
-        <i class='bx bx-grid-alt'></i>
-        <span class="links_name">Dashboard</span>
+    }
+
+    @for (link of configS.sidebar.links; track $index) {
+    <li class="    relative my-2 mx-0 list-none">
+      <a class="    flex h-full w-full rounded-xl items-center no-underline bg-[#11101D] hover:bg-white"
+        [routerLink]="link.url">
+        <i class='    text-center text-[22px] text-white rounded-xl min-w-[50px] h-[60px] bx' [class]="link.icon"></i>
+        <span class="links_name    font-normal text-[15px] text-white whitespace-normal opacity-0 pointer-events-none">
+          {{link.displayName}}
+        </span>
       </a>
-      <span class="tooltip">Dashboard</span>
+      <span class="tooltip    absolute -top-5 bg-white px-3 py-1.5 rounded font-normal opacity-0 whitespace-nowrap pointer-events-none
+        hover:opacity-1 hover:pointer-events-auto hover:top-1/2 block max-xs:hidden">
+        {{link.name}}
+      </span>
     </li>
-    <li>
-      <a href="#">
-        <i class='bx bx-user'></i>
-        <span class="links_name">User</span>
-      </a>
-      <span class="tooltip">User</span>
-    </li>
-    <li>
-      <a href="#">
-        <i class='bx bx-chat'></i>
-        <span class="links_name">Messages</span>
-      </a>
-      <span class="tooltip">Messages</span>
-    </li>
-    <li>
-      <a href="#">
-        <i class='bx bx-pie-chart-alt-2'></i>
-        <span class="links_name">Analytics</span>
-      </a>
-      <span class="tooltip">Analytics</span>
-    </li>
-    <li>
-      <a href="#">
-        <i class='bx bx-folder'></i>
-        <span class="links_name">File Manager</span>
-      </a>
-      <span class="tooltip">Files</span>
-    </li>
-    <li>
-      <a href="#">
-        <i class='bx bx-cart-alt'></i>
-        <span class="links_name">Order</span>
-      </a>
-      <span class="tooltip">Order</span>
-    </li>
-    <li>
-      <a href="#">
-        <i class='bx bx-heart'></i>
-        <span class="links_name">Saved</span>
-      </a>
-      <span class="tooltip">Saved</span>
-    </li>
-    <li>
-      <a href="#">
-        <i class='bx bx-cog'></i>
-        <span class="links_name">Setting</span>
-      </a>
-      <span class="tooltip">Setting</span>
-    </li>
-    <li class="profile">
-      <div class="profile-details">
-        <img src="assets/img/logo_1.webp" alt="profileImg">
+    }
+
+    @if (configS.sidebar.userInfo.visible) {
+    <li class="profile    fixed left-0 -bottom-2 py-2.5 px-2.5 overflow-hidden my-2 mx-0 h-[60px]">
+      <div class="profile-details    flex items-center flex-nowrap">
+        <img class="    object-cover rounded-md mr-2.5 w-11 h-11" [src]="configS.sidebar.userInfo.avatar"
+          alt="profileImg">
         <div class="name_job">
-          <div class="name">Prem Shahi</div>
-          <div class="job">Web designer</div>
+          <div class="name    font-normal whitespace-nowrap text-[12px] text-white">
+            {{configS.sidebar.userInfo.username}}
+          </div>
+          <div class="job    font-normal whitespace-nowrap text-[10px] text-white">
+            {{configS.sidebar.userInfo.role}}
+          </div>
         </div>
       </div>
-      <i class='bx bx-log-out' id="log_out"></i>
+      <i class='bx bx-log-out    absolute top-1/2 right-0 w-full rounded-none text-center cursor-pointer text-white text-[20px] h-[60px] min-w-[50px]'
+        id="log_out"></i>
     </li>
+    }
+
   </ul>
+
 </div>
 
-<section #main class="home-section">
-  <div class="text">Dashboard</div>
+<section #main class="main-section    relative min-h-screen top-0 z-[2]">
+  <!-- TODO: AGREGAR AQUÍ EL NAVBAR -->
+  <!-- <app-navbar></app-navbar> -->
+  <div class="text    inline-block font-medium m-5">
+    <span class="text-dark dark:text-white">Dashboard</span>
+    <i class='    text-center text-[22px] rounded-xl min-w-[50px] h-[60px] cursor-pointer text-dark dark:text-white bx '
+      [class]="configS.darkMode ? 'bxs-moon' : 'bxs-sun'" (click)="onToggleDarkMode()"
+      (keypress)="$event.preventDefault()"></i>
+  </div>
+
 </section>
 
 

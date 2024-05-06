@@ -75,7 +75,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   }
 
   onToggleDarkMode(): void {
-    this.configS.sidebar.darkMode = !this.configS.sidebar.darkMode;
+    this.configS.darkMode = !this.configS.darkMode;
     this.layoutService.persistConfig(this.configS);
     document.body.classList.toggle('dark');
   }

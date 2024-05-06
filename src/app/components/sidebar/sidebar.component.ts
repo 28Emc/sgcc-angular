@@ -28,7 +28,7 @@ export class SidebarComponent implements AfterViewInit {
   layoutService: LayoutService = inject(LayoutService);
   configS: LayoutConfig = this.layoutService.configS();
   isXSmallS = signal<boolean>(false);
-  modeText: string = this.configS.sidebar.darkMode ? 'Light mode' : 'Dark mode';
+  modeText: string = this.configS.darkMode ? 'Light mode' : 'Dark mode';
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -52,7 +52,7 @@ export class SidebarComponent implements AfterViewInit {
     document.body.classList.remove('dark');
     this.toggleSidebar.emit(this.configS.sidebar.collapsed);
     this.sidebarEl.nativeElement.classList.remove('close');
-    if (this.configS.sidebar.darkMode) {
+    if (this.configS.darkMode) {
       document.body.classList.add('dark');
     }
     if (this.configS.sidebar.collapsed) {
@@ -75,7 +75,7 @@ export class SidebarComponent implements AfterViewInit {
   }
 
   onToggleSwitch(): void {
-    this.configS.sidebar.darkMode = !this.configS.sidebar.darkMode;
+    this.configS.darkMode = !this.configS.darkMode;
     this.layoutService.persistConfig(this.configS);
     document.body.classList.toggle('dark');
     this.modeText = document.body.classList.contains('dark') ? 'Light mode' : 'Dark mode';
