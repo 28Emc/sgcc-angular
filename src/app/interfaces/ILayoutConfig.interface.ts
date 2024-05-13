@@ -1,6 +1,7 @@
 export interface ILayoutConfig {
   darkMode: boolean;
   sidebar: ISidebar;
+  navbar: INavbar;
 }
 
 export interface ISidebar {
@@ -12,11 +13,30 @@ export interface ISidebar {
   links: ILink[];
 }
 
+export interface INavbar {
+  visibleDarkModeBtn: boolean;
+  notification?: INotification;
+  userInfo?: IUserInfo;
+}
+
 export interface IUserInfo {
   visible: boolean;
   avatar: string;
   username: string;
   role: string;
+}
+
+export interface INotification {
+  visible: boolean;
+}
+
+export interface INotificationItem {
+  id?: number;
+  type: 'success' | 'info' | 'warning' | 'error';
+  icon: string;
+  title: string;
+  description: string;
+  read: boolean;
 }
 
 export class UserInfo implements IUserInfo {
@@ -95,6 +115,32 @@ export class DefaultLink implements ILink {
   url: string = '';
 }
 
+export class Navbar implements INavbar {
+  visibleDarkModeBtn: boolean = false;
+  notification: Notification = {
+    visible: false,
+  };
+  userInfo: UserInfo = {
+    visible: false,
+    avatar: '',
+    username: '',
+    role: ''
+  };
+}
+
+export class Notification implements INotification {
+  visible: boolean = false;
+}
+
+export class NotificationItem implements INotificationItem {
+  id: number = 0;
+  type: 'success' | 'info' | 'warning' | 'error' = 'info';
+  icon: string = '';
+  title: string = '';
+  description: string = '';
+  read: boolean = false;
+}
+
 export class LayoutConfig implements ILayoutConfig {
   darkMode: boolean = false;
   sidebar: Sidebar = {
@@ -109,6 +155,18 @@ export class LayoutConfig implements ILayoutConfig {
       role: ''
     },
     links: []
+  };
+  navbar: Navbar = {
+    visibleDarkModeBtn: true,
+    notification: {
+      visible: false
+    },
+    userInfo: {
+      visible: false,
+      avatar: "",
+      username: "",
+      role: ""
+    }
   };
 }
 
@@ -318,5 +376,17 @@ export const defaultConfig: LayoutConfig = {
         ]
       }
     ] */
+  },
+  navbar: {
+    visibleDarkModeBtn: true,
+    notification: {
+      visible: true
+    },
+    userInfo: {
+      visible: true,
+      avatar: "https://picsum.photos/200",
+      username: "admin@email.com",
+      role: "Admin"
+    }
   }
 };

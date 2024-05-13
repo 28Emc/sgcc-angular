@@ -41,16 +41,16 @@ export class NavbarComponent implements OnInit, AfterViewInit {
       // avatar: 'https://picsum.photos/32/32'
     };
     this.notificationList = [
-      { id: 1, type: 'success', icon: 'circle-check', title: 'Notification 1', description: 'This is a success notification type text description. For testing purposes.', read: false },
-      { id: 2, type: 'info', icon: 'alert-circle', title: 'Notification 2', description: 'This is a info notification type text description. For testing purposes.', read: false },
-      { id: 3, type: 'warning', icon: 'alert-triangle', title: 'Notification 3', description: 'This is a danger notification type text description. For testing purposes.', read: false },
-      { id: 4, type: 'error', icon: 'circle-x', title: 'Notification 4', description: 'This is a error notification type text description. For testing purposes.', read: false },
-      { id: 5, type: 'success', icon: 'circle-check', title: 'Notification 5', description: 'This is a success notification type text description. For testing purposes.', read: false },
-      { id: 6, type: 'info', icon: 'alert-circle', title: 'Notification 6', description: 'This is a info notification type text description. For testing purposes.', read: false },
-      { id: 7, type: 'warning', icon: 'alert-triangle', title: 'Notification 7', description: 'This is a danger notification type text description. For testing purposes.', read: false },
-      { id: 8, type: 'error', icon: 'circle-x', title: 'Notification 8', description: 'This is a error notification type text description. For testing purposes.', read: false },
-      { id: 9, type: 'success', icon: 'circle-check', title: 'Notification 9', description: 'This is a success notification type text description. For testing purposes.', read: false },
-      { id: 10, type: 'info', icon: 'alert-circle', title: 'Notification 10', description: 'This is a info notification type text description. For testing purposes.', read: false },
+      { id: 1, type: 'success', icon: 'check-circle', title: 'Notification 1', description: 'This is a success notification type text description. For testing purposes.', read: false },
+      { id: 2, type: 'info', icon: 'info-circle', title: 'Notification 2', description: 'This is a info notification type text description. For testing purposes.', read: false },
+      { id: 3, type: 'warning', icon: 'error', title: 'Notification 3', description: 'This is a danger notification type text description. For testing purposes.', read: false },
+      { id: 4, type: 'error', icon: 'error-circle', title: 'Notification 4', description: 'This is a error notification type text description. For testing purposes.', read: false },
+      { id: 5, type: 'success', icon: 'check-circle', title: 'Notification 5', description: 'This is a success notification type text description. For testing purposes.', read: false },
+      { id: 6, type: 'info', icon: 'info-circle', title: 'Notification 6', description: 'This is a info notification type text description. For testing purposes.', read: false },
+      { id: 7, type: 'warning', icon: 'error', title: 'Notification 7', description: 'This is a danger notification type text description. For testing purposes.', read: false },
+      { id: 8, type: 'error', icon: 'error-circle', title: 'Notification 8', description: 'This is a error notification type text description. For testing purposes.', read: false },
+      { id: 9, type: 'success', icon: 'check-circle', title: 'Notification 9', description: 'This is a success notification type text description. For testing purposes.', read: false },
+      { id: 10, type: 'info', icon: 'info-circle', title: 'Notification 10', description: 'This is a info notification type text description. For testing purposes.', read: false },
     ];
     this.notificationsUnread = this.notificationList.filter(n => !n.read).length;
   }
