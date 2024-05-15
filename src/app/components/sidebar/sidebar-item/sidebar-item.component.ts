@@ -28,11 +28,7 @@ export class SidebarItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /* console.log('link', this.link);
-    if (this.customCss.length) {
-      const el = this.link.type === 'dropdown' ? 'dropdown-a' : 'link-a';
-      document.getElementById(el)?.classList.add(this.customCss.join(''));
-    } */
+
   }
 
   displayTitleName(link: Link): string {

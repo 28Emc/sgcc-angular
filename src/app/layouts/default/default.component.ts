@@ -7,6 +7,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { INotificationItem, LayoutConfig } from '../../interfaces/ILayoutConfig.interface';
 import { LayoutService } from '../../services/layout.service';
+import { ClickOutsideDirective } from '../../directives/click-outside.directive';
 
 @Component({
   selector: 'app-default',
@@ -16,12 +17,18 @@ import { LayoutService } from '../../services/layout.service';
     RouterModule,
     SidebarComponent,
     NavbarComponent,
+    ClickOutsideDirective
   ],
   templateUrl: './default.component.html',
   styleUrl: './default.component.scss'
 })
 export class DefaultComponent implements OnInit, AfterViewInit {
   @ViewChild('sidebar', { static: true }) sidebar!: ElementRef<HTMLElement>;
+  @ViewChild('main', { static: true }) main!: ElementRef;
+  /* @ViewChild('navbar', { static: true }) navbar!: ElementRef;
+  @ViewChild('content', { static: true }) content!: ElementRef; */
+  readonly SIDEBAR_OPEN_WIDTH = '250px';
+  readonly SIDEBAR_COLLAPSED_WIDTH = '78px';
   layoutService: LayoutService = inject(LayoutService);
   configS: LayoutConfig = this.layoutService.configS();
 
@@ -50,6 +57,7 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    // this.onToggleSidebar(this.configS.sidebar.collapsed);
     this.breakpointObserver.observe(Breakpoints.XSmall)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(state => {
@@ -88,19 +96,18 @@ export class DefaultComponent implements OnInit, AfterViewInit {
 
   /* sidebar */
   onToggleSidebar(): void {
-    console.log('this.configS.sidebar.collapsed', this.configS.sidebar.collapsed)
     this.sidebar.nativeElement.classList.toggle('open');
     this.configS.sidebar.collapsed = !this.configS.sidebar.collapsed;
     this.layoutService.persistConfig(this.configS);
   }
+
+  /* onToggleNavbar(): void {
+    this.sidebar.nativeElement.classList.toggle('open');
+    this.configS.sidebar.collapsed = !this.configS.sidebar.collapsed;
+    this.layoutService.persistConfig(this.configS);
+  } */
 
   /* navbar */
-  onToggleNavbar(): void {
-    this.sidebar.nativeElement.classList.toggle('open');
-    this.configS.sidebar.collapsed = !this.configS.sidebar.collapsed;
-    this.layoutService.persistConfig(this.configS);
-  }
-
   onToggleDarkMode(): void {
     document.body.classList.toggle('dark');
     this.configS.darkMode = !this.configS.darkMode;
@@ -108,14 +115,36 @@ export class DefaultComponent implements OnInit, AfterViewInit {
     this.layoutService.persistConfig(this.configS);
   }
 
+  /* onToggleSidebar(collapsed: boolean): void {
+    if (collapsed) {
+      console.log("collapsed on", collapsed);
+      this.main.nativeElement.classList.remove(`left-[${this.SIDEBAR_OPEN_WIDTH}]`, `w-[calc(100%-${this.SIDEBAR_OPEN_WIDTH})]`);
+      this.main.nativeElement.classList.add(`left-[${this.SIDEBAR_COLLAPSED_WIDTH}]`, `w-[calc(100%-${this.SIDEBAR_COLLAPSED_WIDTH})]`);
+      this.content.nativeElement.classList.remove(`left-[${this.SIDEBAR_OPEN_WIDTH}]`, `w-[calc(100%-${this.SIDEBAR_OPEN_WIDTH})]`);
+      this.content.nativeElement.classList.add(`left-[${this.SIDEBAR_COLLAPSED_WIDTH}]`, `w-[calc(100%-${this.SIDEBAR_COLLAPSED_WIDTH})]`);
+    } else {
+      console.log("collapsed off", collapsed);
+      this.main.nativeElement.classList.remove(`left-[${this.SIDEBAR_COLLAPSED_WIDTH}]`, `w-[calc(100%-${this.SIDEBAR_COLLAPSED_WIDTH})]`);
+      this.main.nativeElement.classList.add(`left-[${this.SIDEBAR_OPEN_WIDTH}]`, `w-[calc(100%-${this.SIDEBAR_OPEN_WIDTH})]`);
+      this.content.nativeElement.classList.remove(`left-[${this.SIDEBAR_COLLAPSED_WIDTH}]`, `w-[calc(100%-${this.SIDEBAR_COLLAPSED_WIDTH})]`);
+      this.content.nativeElement.classList.add(`left-[${this.SIDEBAR_OPEN_WIDTH}]`, `w-[calc(100%-${this.SIDEBAR_OPEN_WIDTH})]`);
+    }
+    console.log('this.main.nativeElement.classList', this.main.nativeElement.classList)
+    console.log('this.content.nativeElement.classList', this.content.nativeElement.classList)
+  } */
+
 
   /* user */
-  onUserAvatarClicked(): void {
+  onUserAvatarClicked(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
     this.avatarClicked = !this.avatarClicked;
   }
 
   /* notifications */
-  onNotificationsClicked(): void {
+  onNotificationsClicked(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
     this.notificationsClicked = !this.notificationsClicked;
   }
 
