@@ -190,7 +190,7 @@ export const defaultConfig: LayoutConfig = {
         type: 'link',
         name: 'Dashboard',
         displayName: 'Dashboard',
-        icon: 'bxs-dashboard',
+        icon: 'layout-dashboard',
         url: '/dashboard'
       },
       {
@@ -199,7 +199,7 @@ export const defaultConfig: LayoutConfig = {
         type: 'link',
         name: 'Housings',
         displayName: 'Housings',
-        icon: 'bxs-building-house',
+        icon: 'building',
         url: '/housings'
       },
       {
@@ -208,7 +208,7 @@ export const defaultConfig: LayoutConfig = {
         type: 'link',
         name: 'Rooms',
         displayName: 'Rooms',
-        icon: 'bxs-door-open',
+        icon: 'door',
         url: '/rooms'
       },
       {
@@ -217,66 +217,74 @@ export const defaultConfig: LayoutConfig = {
         type: 'link',
         name: 'Tenants',
         displayName: 'Tenants',
-        icon: 'bxs-group',
+        icon: 'users-group',
         url: '/tenants'
       },
       {
         id: 5,
         parentId: 0,
         type: 'link',
-        name: 'Measuring Devices',
-        displayName: 'Measuring Devices',
-        icon: 'bxs-food-menu',
-        url: '/measuring-devices'
+        name: 'Receipts',
+        displayName: 'Receipts',
+        icon: 'receipt-2',
+        url: '/receipts'
       },
       {
         id: 6,
         parentId: 0,
         type: 'link',
-        name: 'Measuring Device Readings',
-        displayName: 'Readings',
-        icon: 'bx-poll',
-        url: '/measuring-device-readings'
+        name: 'Measuring Devices',
+        displayName: 'Measuring Devices',
+        icon: 'devices-search',
+        url: '/measuring-devices'
       },
       {
         id: 7,
         parentId: 0,
         type: 'link',
+        name: 'Measuring Device Readings',
+        displayName: 'Readings',
+        icon: 'number-123',
+        url: '/measuring-device-readings'
+      },
+      {
+        id: 8,
+        parentId: 0,
+        type: 'link',
         name: 'Tenant Calculations',
         displayName: 'Calculations',
-        icon: 'bxs-calculator',
+        icon: 'calculator',
         url: '/calculations',
-      }
-    ]
-    /* links: [
+      },
+      //? TEST
       {
-        id: 1,
+        id: 100,
         parentId: 0,
         type: 'link',
         name: 'Dashboard',
         displayName: 'Dashboard',
-        icon: 'bxs-dashboard',
+        icon: 'layout-dashboard',
         url: '/dashboard'
       },
       {
-        id: 2,
+        id: 200,
         parentId: 0,
         type: 'title',
         name: 'Catalog',
         displayName: 'Catalog',
         children: [
           {
-            id: 3,
-            parentId: 2,
+            id: 300,
+            parentId: 200,
             type: 'link',
             name: 'Housings',
             displayName: 'Housings',
-            icon: 'building-community',
+            icon: 'building',
             url: '/housings'
           },
           {
-            id: 4,
-            parentId: 2,
+            id: 400,
+            parentId: 200,
             type: 'link',
             name: 'Rooms',
             displayName: 'Rooms',
@@ -284,47 +292,47 @@ export const defaultConfig: LayoutConfig = {
             url: '/rooms'
           },
           {
-            id: 5,
-            parentId: 2,
+            id: 500,
+            parentId: 200,
             type: 'link',
             name: 'Tenants',
             displayName: 'Tenants',
-            icon: 'users',
+            icon: 'users-group',
             url: '/tenants'
           },
           {
-            id: 5,
-            parentId: 2,
+            id: 500,
+            parentId: 200,
             type: 'dropdown',
             name: 'Receipts',
             displayName: 'Receipts',
-            icon: 'receipt',
+            icon: 'receipt-2',
             isOpen: false,
             deep: 1,
             children: [
               {
-                id: 6,
-                parentId: 5,
+                id: 600,
+                parentId: 500,
                 type: 'link',
                 name: 'Receipts 1',
                 displayName: 'Receipts 1',
-                icon: 'receipt',
+                icon: 'receipt-2',
                 url: '/receipts-1'
               },
             ]
           },
           {
-            id: 7,
-            parentId: 2,
+            id: 700,
+            parentId: 200,
             type: 'link',
             name: 'Measuring Devices',
             displayName: 'Measuring Devices',
-            icon: 'device-heart-monitor',
+            icon: 'devices-search',
             url: '/measuring-devices'
           },
           {
-            id: 8,
-            parentId: 2,
+            id: 800,
+            parentId: 200,
             type: 'link',
             name: 'Measuring Device Readings',
             displayName: 'Readings',
@@ -334,15 +342,15 @@ export const defaultConfig: LayoutConfig = {
         ]
       },
       {
-        id: 9,
+        id: 900,
         parentId: 0,
         type: 'title',
         name: 'Operations',
         displayName: 'Operations',
         children: [
           {
-            id: 10,
-            parentId: 9,
+            id: 1000,
+            parentId: 900,
             type: 'dropdown',
             name: 'Tenant Calculations',
             displayName: 'Calculations',
@@ -351,8 +359,8 @@ export const defaultConfig: LayoutConfig = {
             deep: 1,
             children: [
               {
-                id: 12,
-                parentId: 10,
+                id: 1200,
+                parentId: 1000,
                 type: 'dropdown',
                 name: 'Tenant Calculations 2',
                 displayName: 'Calculations 2',
@@ -361,8 +369,8 @@ export const defaultConfig: LayoutConfig = {
                 deep: 2,
                 children: [
                   {
-                    id: 13,
-                    parentId: 12,
+                    id: 1300,
+                    parentId: 1200,
                     type: 'link',
                     name: 'Tenant Calculations 3',
                     displayName: 'Calculations 3',
@@ -375,7 +383,8 @@ export const defaultConfig: LayoutConfig = {
           }
         ]
       }
-    ] */
+      //? FIN TEST
+    ]
   },
   navbar: {
     visibleDarkModeBtn: true,

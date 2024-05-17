@@ -5,7 +5,6 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./layouts/vertical/vertical.component').then((c) => c.VerticalComponent),
-    //loadComponent: () => import('./layouts/default/default.component').then((c) => c.DefaultComponent),
     // canActivate: [authGuard],
     children: [
       {

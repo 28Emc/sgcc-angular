@@ -1,102 +1,97 @@
-<section
-  class="flex items-center justify-between rounded-md p-4 bg-content-light dark:bg-content-dark text-typography-default dark:text-typography-dark shadow-lg dark:shadow-sm shadow-gray-200 dark:shadow-gray-800 transition-all min-h-[25px]">
+<section #navbar class="flex items-center justify-between p-3 bg-content-light dark:bg-content-dark text-typography-default dark:text-typography-dark shadow-lg
+      dark:shadow-sm shadow-gray-200 dark:shadow-gray-800 transition-all duration-300">
 
-  <a id="nav-menu-mobile-btn" class="md:hidden block" (click)="onToggleSidebar()">
-    <i-tabler name="menu-2"
-      class='min-w-[25px] rounded-sm text-typography-default group-hover:text-typography-default dark:text-typography-dark group-hover:dark:text-typography-light transition-all cursor-pointer'></i-tabler>
+  <a id="nav-menu-mobile-btn" (click)="onToggleSidebar()">
+    <i-tabler [name]="configS.sidebar.collapsed ? 'menu-deep' : 'menu-2'"
+      class='text-center cursor-pointer text-typography-default dark:text-typography-dark text-2xl transition-all duration-300'></i-tabler>
   </a>
-  <div class="md:block hidden"></div>
-  <div class="flex items-center justify-end gap-3">
+
+  <div class="flex items-center justify-end gap-5">
 
     <a id="nav-dark-mode-btn" (click)="onToggleDarkMode()">
       <i-tabler [name]="configS.darkMode ? 'sun' : 'moon'"
-        class='rounded-sm text-typography-default group-hover:text-typography-default dark:text-typography-dark group-hover:dark:text-typography-light transition-all cursor-pointer'></i-tabler>
+        class=' text-typography-default dark:text-typography-dark transition-all duration-300 text-2xl cursor-pointer'></i-tabler>
     </a>
 
-    <div id="nav-notifications-btn" class="relative">
-      <i-tabler (click)="onNotificationsClicked()" id="notification-button"
-        [name]="notificationsUnread > 0 ? 'bell-ringing' : 'bell'"
-        class='rounded-sm text-typography-default group-hover:text-typography-default dark:text-typography-dark group-hover:dark:text-typography-light transition-all cursor-pointer'></i-tabler>
+    <a id="nav-notifications-btn" (click)="onNotificationsClicked($event)" class="cursor-pointer relative">
+      <i-tabler [name]="notificationsUnread > 0 ? 'bell-ringing' : 'bell'"
+        class='text-typography-default dark:text-typography-dark transition-all text-2xl duration-300'></i-tabler>
       @if (notificationsUnread > 0) {
       <span
-        class="absolute -top-2.5 -right-2 min-w-5 min-h-5 flex items-center justify-center text-[0.70rem] px-1 rounded-full bg-primary-light text-typography-light">
-        {{notificationsUnread > 0 && notificationsUnread < 10 ? notificationsUnread : '9+' }} </span>
-          }
-          <div [ngClass]="{
-          'transform opacity-0 scale-95': !notificationsClicked,
-          'transform opacity-100 scale-100': notificationsClicked,
-          'w-[23rem] -right-40': isXSmallS(),
-          'w-96 right-0': !isXSmallS(),
-        }" class="notificacion-content absolute z-10 mt-6 origin-top-right rounded-md bg-content-light dark:bg-content-dark py-1 shadow-lg focus:outline-none transition ease-out duration-100"
-            role="menu" aria-orientation="vertical" aria-labelledby="notification-button" tabindex="-1">
-            <div class="flex items-start">
-              <span class="p-3 font-semibold">Notifications</span>
-            </div>
-            <hr class="text-typography-default">
-            <div class="max-h-[500px] overflow-y-auto">
-              @for (noti of notificationList; track $index) {
-              <div (click)="markNotificationAsRead(noti);"
-                class="block px-4 py-3 text-typography-default dark:text-typography-dark hover:bg-typography-light hover:dark:bg-typography-default transition-all cursor-pointer"
-                role="menuitem" tabindex="-1">
-                <div class="flex items-center justify-center gap-3">
-                  <i-tabler [name]="noti.icon" class='transition-all min-w-[35px] text-[25px]' [ngClass]="{
-                    'text-teal-400 font-light' : noti.type === 'success',
-                    'text-cyan-400 font-light' : noti.type === 'info',
-                    'text-orange-400 font-light' : noti.type === 'warning',
-                    'text-red-400 font-light' : noti.type === 'error',
-                    'text-typography-default font-extralight opacity-40' : noti.read,
-                  }"></i-tabler>
-                  <div class="flex flex-col items-start">
-                    <span class="text-sm font-semibold" [ngClass]="{
-                      'opacity-40': noti.read
-                    }">{{noti.title}}</span>
-                    <p class="text-sm" [ngClass]="{
-                      'opacity-40': noti.read
-                    }">{{noti.description}}</p>
-                  </div>
-                </div>
-              </div>
-              }
+        class="absolute -top-2 -right-2 min-w-5 min-h-5 flex items-center justify-center text-[0.70rem] px-1 rounded-full bg-red-400 text-typography-light">
+        {{getCurrentNotifications()}}
+      </span>
+      }
+    </a>
+
+    <div #navNotificationsContainer (clickOutside)="notificationsClicked = false" [ngClass]="{
+                  'transform opacity-0 scale-95 -z-10': !notificationsClicked,
+                  'transform opacity-100 scale-100 z-10': notificationsClicked
+                }" class="notificacion-content absolute mt-6 origin-top-right rounded-md bg-content-light dark:bg-content-dark py-1 shadow-lg focus:outline-none
+                  transition-all duration-300 w-96 right-44 top-10" role="menu" aria-orientation="vertical"
+      aria-labelledby="notification-button" tabindex="-1">
+      <div class="flex items-start">
+        <span class="p-3 font-semibold">Notifications</span>
+      </div>
+      <hr class="text-typography-default">
+      <div class="max-h-[500px] overflow-y-auto">
+        @for (noti of notificationList; track $index) {
+        <a (click)="markNotificationAsRead(noti);"
+          class="block px-4 py-3 text-typography-default dark:text-typography-dark hover:bg-typography-light hover:dark:bg-typography-default transition-all cursor-pointer"
+          role="menuitem" tabindex="-1">
+          <div class="flex items-center justify-center gap-3">
+            <i-tabler [name]="noti.icon" class='transition-all min-w-[35px] text-[25px]' [ngClass]="{
+                      'text-green-400' : noti.type === 'success',
+                      'text-sky-400' : noti.type === 'info',
+                      'text-orange-400' : noti.type === 'warning',
+                      'text-red-400' : noti.type === 'error',
+                      'text-typography-default opacity-40' : noti.read,
+                    }"></i-tabler>
+            <div class="flex flex-col items-start">
+              <span class="text-sm font-semibold" [ngClass]="{
+                        'opacity-40': noti.read
+                      }">{{noti.title}}</span>
+              <p class="text-sm" [ngClass]="{
+                        'opacity-40': noti.read
+                      }">{{noti.description}}</p>
             </div>
           </div>
+        </a>
+        }
+      </div>
     </div>
 
-    <div id="nav-user-btn" class="flex gap-3">
+    <a id="nav-user-btn" (click)="onUserAvatarClicked($event)" class="flex gap-3 cursor-pointer">
       <div id="nav-user-info" class="flex flex-col items-end">
         <span
           class="text-typography-default dark:text-typography-dark text-sm font-semibold">{{currentUser.username}}</span>
         <span class="text-typography-default dark:text-typography-dark text-xs font-light">{{currentUser.role}}</span>
       </div>
-      <div id="nav-user-avatar" class="relative">
-        <div>
-          <button type="button" (click)="onUserAvatarClicked()"
-            class="relative flex max-w-xs items-center rounded-full text-sm focus:outline-none" id="user-menu-button"
-            aria-expanded="false" aria-haspopup="true">
-            <span class="absolute -inset-1.5"></span>
-            <span class="sr-only">Open user menu</span>
-            <img class="h-8 w-8 rounded-full" [src]="currentUser.avatar ?? 'https://placehold.co/32x32?text=I'"
-              alt="avatar">
-            <span class='rounded-[50%] absolute w-2.5 h-2.5 right-0 bottom-0 bg-green-500'></span>
-          </button>
-        </div>
-        <div [ngClass]="{
-          'transform opacity-0 scale-95': !avatarClicked,
-          'transform opacity-100 scale-100': avatarClicked,
-        }"
-          class="absolute right-0 z-10 mt-6 w-56 origin-top-right rounded-md bg-content-light dark:bg-content-dark py-1 shadow-lg focus:outline-none transition ease-out duration-100"
-          role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-          <a routerLink="/profile"
-            class="block px-4 py-2 text-sm text-typography-default dark:text-typography-dark hover:bg-typography-light hover:dark:bg-typography-default transition-all cursor-pointer"
-            role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-          <a routerLink="/settings"
-            class="block px-4 py-2 text-sm text-typography-default dark:text-typography-dark hover:bg-typography-light hover:dark:bg-typography-default transition-all cursor-pointer"
-            role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-          <hr class="text-typography-light">
-          <a routerLink="/auth/login"
-            class="block px-4 py-2 text-sm text-typography-default dark:text-typography-dark hover:bg-typography-light hover:dark:bg-typography-default transition-all cursor-pointer"
-            role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+      <div class="relative">
+        <div class="relative flex max-w-xs items-center rounded-full text-sm focus:outline-none">
+          <img class="h-8 w-8 rounded-full" [src]="currentUser.avatar ?? 'https://picsum.photos/32'"
+            alt="avatar">
+          <span class='rounded-[50%] absolute w-2.5 h-2.5 right-0 bottom-0 bg-green-500'></span>
         </div>
       </div>
+    </a>
+
+    <div #navUserContainer (clickOutside)="avatarClicked = false;" [ngClass]="{
+          'transform opacity-0 scale-95 -z-10': !avatarClicked,
+          'transform opacity-100 scale-100 z-10': avatarClicked,
+        }"
+      class="absolute right-1 top-10 mt-6 w-56 origin-top-right rounded-md bg-content-light dark:bg-content-dark py-1 shadow-lg focus:outline-none transition ease-out duration-100"
+      role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+      <a routerLink="/dashboard"
+        class="block px-4 py-2 text-sm text-typography-default dark:text-typography-dark hover:bg-typography-light hover:dark:bg-typography-default transition-all cursor-pointer"
+        role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+      <a routerLink="/dashboard"
+        class="block px-4 py-2 text-sm text-typography-default dark:text-typography-dark hover:bg-typography-light hover:dark:bg-typography-default transition-all cursor-pointer"
+        role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+      <hr class="text-typography-light">
+      <a routerLink="/auth/login"
+        class="block px-4 py-2 text-sm text-typography-default dark:text-typography-dark hover:bg-typography-light hover:dark:bg-typography-default transition-all cursor-pointer"
+        role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
     </div>
 
   </div>

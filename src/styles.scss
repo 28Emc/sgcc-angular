@@ -16,8 +16,8 @@
 }
 
 :root {
-  --sidebar-open-width: 250px;
-  --sidebar-collapsed-width: 78px;
+  --sidebar-open-width: 260px;
+  --sidebar-collapsed-width: 80px;
   --body-bg: #E4E9F7;
   --sidebar-bg: #11101D;
   --main-bg: #E4E9F7;
@@ -46,6 +46,7 @@ body.dark {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
+  border-radius: 5px;
 }
 
 /* Handle on hover */

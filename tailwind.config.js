@@ -174,7 +174,7 @@ module.exports = {
       },
       'typography': {
         'light': '#F6F5FF',
-        'default': '#212121',
+        'default': '#414141',
         'dark': '#CCC'
       },
       'body': {

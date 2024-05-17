@@ -1,122 +1,35 @@
-<div #sidebar class="sidebar    fixed left-0 top-0 h-full py-1.5 px-3.5 z-[99]" [ngClass]="{
-  'open': !configS.sidebar.collapsed
-}">
+<section #sidebar
+  class="bg-sidebar-light text-typography-light dark:bg-sidebar-dark dark:text-typography-dark
+    py-1.5 px-2 z-[99] h-screen hover:overflow-y-scroll overflow-y-hidden absolute transition-all duration-300 w-[250px]" [ngClass]="{
+      'left-0': configS.sidebar.collapsed,
+      '-left-[250px]': !configS.sidebar.collapsed
+    }">
 
-  <div class="logo-details    flex items-center relative h-[60px]">
-    <i class='bx bxl-c-plus-plus icon    text-center text-[28px] text-white rounded-xl min-w-[50px] h-[60px]'></i>
-    <div class="logo_name    text-white font-semibold text-[20px]">
-      {{configS.sidebar.title}}
+  <div class="flex items-center justify-between gap-2 mt-2">
+    <div class="flex items-center justify-start gap-2">
+      <img [src]="configS.sidebar.imgSrc" alt="logo" class="rounded w-9 max-w-9">
+      <div class="text-typography-light font-semibold text-xl">
+        {{configS.sidebar.title}}
+      </div>
     </div>
-    <i #btn
-      class='    absolute top-1/2 right-0 text-center cursor-pointer text-[22px] text-white min-w-[50px] h-[60px] bx'
-      [ngClass]="{
-      'bx-menu-alt-right': sidebar.classList.contains('open'),
-      'bx-menu': !sidebar.classList.contains('open')
-    }" id="btn" (click)="onToggleSidebar()" (keypress)="null"></i>
   </div>
 
-  <ul class="nav-list    mt-5 h-full">
+  <ul class="mt-5 flex flex-col gap-2.5">
 
     @if (configS.sidebar.search) {
-    <li class="    relative my-2 mx-0 list-none">
-      <i class='bx bx-search    absolute top-1/2 left-0 text-center text-[22px] bg-[#1d1b31] hover:bg-white text-white hover:text-[#1d1b31] rounded-xl min-w-[50px] h-[60px]'
-        (click)="onToggleSidebar()" (keypress)="$event.preventDefault()"></i>
+    <li class="list-none relative flex items-center">
+      <i-tabler name="search" class='text-typography-light text-xl absolute text-center pointer-events-none mx-2'
+        (click)="onToggleSidebar()" (keypress)="$event.preventDefault()"></i-tabler>
       <input
-        class="    text-white bg-[#1d1b31] font-normal text-[15px] w-full rounded-xl outline-none h-[50px] border-none"
+        class="text-typography-light bg-[#1d1b31] font-normal text-base rounded-xl outline-none h-[40px] border-none w-full pl-9"
         type="text" placeholder="Search...">
-      <span
-        class="tooltip    absolute -top-5 px-3 py-1.5 rounded font-normal opacity-0 whitespace-nowrap pointer-events-none bg-white text-[15px] z-[3] block max-xs:hidden">
-        Search
-      </span>
     </li>
     }
 
     @for (link of configS.sidebar.links; track $index) {
-    <li class="    relative my-2 mx-0 list-none">
-      <a class="    flex h-full w-full rounded-xl items-center no-underline bg-[#11101D] hover:bg-white"
-        [routerLink]="link.url">
-        <i class='    text-center text-[22px] text-white rounded-xl min-w-[50px] h-[60px] bx' [class]="link.icon"></i>
-        <span class="links_name    font-normal text-[15px] text-white whitespace-normal opacity-0 pointer-events-none">
-          {{link.displayName}}
-        </span>
-      </a>
-      <span class="tooltip    absolute -top-5 bg-white px-3 py-1.5 rounded font-normal opacity-0 whitespace-nowrap pointer-events-none
-        hover:opacity-1 hover:pointer-events-auto hover:top-1/2 block max-xs:hidden">
-        {{link.name}}
-      </span>
-    </li>
-    }
-
-    @if (configS.sidebar.userInfo.visible) {
-    <li class="profile    fixed left-0 -bottom-2 py-2.5 px-2.5 overflow-hidden my-2 mx-0 h-[60px]">
-      <div class="profile-details    flex items-center flex-nowrap">
-        <img class="    object-cover rounded-md mr-2.5 w-11 h-11" [src]="configS.sidebar.userInfo.avatar"
-          alt="profileImg">
-        <div class="name_job">
-          <div class="name    font-normal whitespace-nowrap text-[12px] text-white">
-            {{configS.sidebar.userInfo.username}}
-          </div>
-          <div class="job    font-normal whitespace-nowrap text-[10px] text-white">
-            {{configS.sidebar.userInfo.role}}
-          </div>
-        </div>
-      </div>
-      <i class='bx bx-log-out    absolute top-1/2 right-0 w-full rounded-none text-center cursor-pointer text-white text-[20px] h-[60px] min-w-[50px]'
-        id="log_out"></i>
-    </li>
+    <app-sidebar-item [link]="link"></app-sidebar-item>
     }
 
   </ul>
 
-</div>
-
-
-
-
-<!-- <nav #sidebar
-  class="bg-sidebar-light dark:bg-sidebar-dark transition-all fixed top-0 left-0 h-full z-[100] items-center shadow-sm py-[10px] px-[14px]"
-  [ngClass]="{
-  'w-[250px] md:opacity-100 opacity-0': !configS.sidebar.collapsed && !isXSmallS(),
-  'w-[75px] md:opacity-100 opacity-0': configS.sidebar.collapsed && !isXSmallS(),
-  'w-[250px] z-100': !configS.sidebar.collapsed && isXSmallS() || !configS.sidebar.collapsed && !isXSmallS(),
-  'w-0 z-0': configS.sidebar.collapsed && isXSmallS(),
-}">
-  <header class="relative">
-    <div class="flex items-center" [ngClass]="{
-      'gap-2 px-2': !configS.sidebar.collapsed,
-      'gap-0': configS.sidebar.collapsed,
-    }">
-      <span class="flex items-center justify-center min-w-[47px] rounded-md" [ngClass]="{
-        'block': isXSmallS() && configS.sidebar.collapsed || !isXSmallS() && !configS.sidebar.collapsed,
-      }">
-        <img class="w-[47px] h-[47px] rounded-md" [src]="configS.sidebar.imgSrc" alt="logo">
-      </span>
-      <div class="flex flex-col items-start text-[17px] font-normal whitespace-nowrap transition-all" [ngClass]="{
-      'block': !configS.sidebar.collapsed,
-      'hidden': configS.sidebar.collapsed
-    }" *ngIf="configS.sidebar.userInfo.visible">
-        <span
-          class="text-typography-default dark:text-typography-dark transition-all mt-[2px] text-[13px] font-semibold">{{configS.sidebar.userInfo.username}}</span>
-        <span
-          class="text-typography-default dark:text-typography-dark transition-all text-[12px] -mt-[2px] font-light block">{{configS.sidebar.userInfo.role}}</span>
-      </div>
-    </div>
-    <i-tabler name="chevron-right"
-      class='bg-primary-dark hover:bg-primary-light text-white dark:bg-primary-dark dark:hover:bg-primary-light hover:scale-110 transition-all absolute -right-[25px] h-[25px] w-[25px] rounded-[50%] flex items-center justify-center text-[22px] cursor-pointer'
-      (click)="!isXSmallS() ? onToggleSidebar() : onToggleSidebarMobile()" [ngClass]="{
-      'rotate-180': !configS.sidebar.collapsed,
-      'rotate-0': configS.sidebar.collapsed,
-      'hidden': !configS.sidebar.collapsed && isXSmallS() || configS.sidebar.collapsed && !isXSmallS(),
-      'block': configS.sidebar.collapsed && isXSmallS() || !configS.sidebar.collapsed && !isXSmallS(),
-    }"></i-tabler>
-  </header>
-  <div class="menu-bar h-[calc(100%-55px)] flex flex-col justify-between overflow-y-scroll">
-    <div class="my-5">
-      <ul>
-        @for (link of configS.sidebar.links; track $index) {
-        <app-sidebar-item [link]="link"></app-sidebar-item>
-        }
-      </ul>
-    </div>
-  </div>
-</nav> -->
+</section>
