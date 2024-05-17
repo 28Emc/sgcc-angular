@@ -168,27 +168,36 @@ module.exports = {
         'light': colors.orange[400],
         'dark': '#3A3B3C'
       },
+      'body': {
+        'light': '#E2E8F0',
+        'dark': '#18191A'
+      },
+      'navbar': {
+        'light': '#F1F5F9',
+        'semi-light': '#CBD5E1',
+        'semi-dark': '#1F2937',
+        'dark': '#0F172A'
+      },
+      'sidebar': {
+        'light': '#F1F5F9',
+        'semi-light': '#CBD5E1',
+        DEFAULT: '#B0C0D6',
+        'semi-dark': '#1F2937',
+        'dark': '#11101D'
+      },
+      'content': {
+        'light': '#FFF',
+        'dark': '#242526'
+      },
       'title': {
         'light': '#707070',
         'dark': '#CCC'
       },
       'typography': {
         'light': '#F6F5FF',
-        'default': '#414141',
+        DEFAULT: '#2F2F2F',
         'dark': '#CCC'
       },
-      'body': {
-        'light': '#F6F6F6',
-        'dark': '#18191A'
-      },
-      'sidebar': {
-        'light': '#11101D',
-        'dark': '#11101D'
-      },
-      'content': {
-        'light': '#FFF',
-        'dark': '#242526'
-      }
     }),
     columns: {
       auto: 'auto',

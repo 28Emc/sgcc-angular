@@ -15,25 +15,6 @@
   font-family: 'Poppins', sans-serif;
 }
 
-:root {
-  --sidebar-open-width: 260px;
-  --sidebar-collapsed-width: 80px;
-  --body-bg: #E4E9F7;
-  --sidebar-bg: #11101D;
-  --main-bg: #E4E9F7;
-  --content-bg: transparent;
-}
-
-body {
-  background-color: var(--body-bg);
-}
-
-body.dark {
-  --body-bg: #1c1b27;
-  --sidebar-bg: #11101D;
-  --main-bg: #1c1b27;
-}
-
 ::-webkit-scrollbar {
   width: 7px;
 }

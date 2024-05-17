@@ -4,7 +4,7 @@
   <a
     class="transition-all duration-200 pointer-events-none flex items-center justify-start pl-2 rounded-md no-underline">
     <span
-      class="text-typography-dark dark:text-typography-dark transition-all duration-300 font-medium whitespace-nowrap text-md">
+      class="transition-all duration-200 font-medium whitespace-nowrap text-md text-typography dark:text-typography-dark">
       {{displayLinkName(link) | uppercase}}
     </span>
   </a>
@@ -15,10 +15,10 @@
 }
 @case ('dropdown') {
 <li class="list-none relative" (click)="onClickChild(link)">
-  <a routerLinkActive="bg-white text-sidebar-light" class="flex items-center rounded-lg py-2.5 px-1.5 no-underline transition-all duration-200
-  text-typography-light hover:bg-white hover:text-sidebar-light cursor-pointer gap-2.5 group {{customCss.join('')}}"
+  <a class="flex items-center rounded-lg py-2.5 px-1.5 no-underline transition-all duration-200 cursor-pointer gap-2.5 group
+  text-typography hover:bg-sidebar-dark hover:text-typography-light dark:text-typography-dark hover:dark:bg-sidebar-light hover:dark:text-typography {{customCss.join('')}}"
     [routerLink]="link.url">
-    @if (link.deep && link.deep <= 1) { <i-tabler [name]="link.icon!" class='transition-all ease-linear text-xl'>
+    @if (link.deep && link.deep <= 1) { <i-tabler [name]="link.icon!" class='transition-all duration-200 text-xl'>
       </i-tabler>
       }
       <span class="font-normal text-base whitespace-normal pointer-events-none">
@@ -31,7 +31,7 @@
   </a>
 </li>
 
-<div class="bg-[#1d1b31]">
+<div class="bg-sidebar-semi-light dark:bg-sidebar-semi-dark">
   @if (link.children) {
 
   @for (child1st of link.children; track $index) {
@@ -65,8 +65,9 @@
 }
 @case ('link') {
 <li class="list-none">
-  <a class="flex rounded-lg items-center py-2.5 px-1.5 no-underline transition-all duration-200  text-typography-light hover:bg-white hover:text-sidebar-light
-         cursor-pointer gap-2.5 group {{customCss.join('')}}" [routerLink]="link.url">
+  <a class="flex rounded-lg items-center py-2.5 px-1.5 no-underline transition-all duration-200 cursor-pointer gap-2.5 group
+  text-typography hover:bg-sidebar-dark hover:text-typography-light dark:text-typography-dark hover:dark:bg-sidebar-light hover:dark:text-typography {{customCss.join('')}}"
+    [routerLink]="link.url">
     @if (showIcon) {
     <i-tabler [name]="link.icon!" class='transition-all duration-200 text-xl'></i-tabler>
     }

@@ -1,14 +1,13 @@
-<section #sidebar
-  class="bg-sidebar-light text-typography-light dark:bg-sidebar-dark dark:text-typography-dark
-    py-1.5 px-2 z-[99] h-screen hover:overflow-y-scroll overflow-y-hidden absolute transition-all duration-300 w-[250px]" [ngClass]="{
+<section #sidebar class="py-1.5 px-2 z-[99] h-screen hover:overflow-y-scroll overflow-y-hidden absolute transition-all duration-300 w-[250px]
+  bg-sidebar-light dark:bg-sidebar-dark shadow-sm shadow-slate-300 dark:shadow-navbar-dark" [ngClass]="{
       'left-0': configS.sidebar.collapsed,
       '-left-[250px]': !configS.sidebar.collapsed
     }">
 
   <div class="flex items-center justify-between gap-2 mt-2">
     <div class="flex items-center justify-start gap-2">
-      <img [src]="configS.sidebar.imgSrc" alt="logo" class="rounded w-9 max-w-9">
-      <div class="text-typography-light font-semibold text-xl">
+      <img [src]="configS.sidebar.imgSrc" alt="logo" class="rounded-md w-9 max-w-9">
+      <div class="font-semibold text-xl text-typography dark:text-typography-dark">
         {{configS.sidebar.title}}
       </div>
     </div>
@@ -18,10 +17,12 @@
 
     @if (configS.sidebar.search) {
     <li class="list-none relative flex items-center">
-      <i-tabler name="search" class='text-typography-light text-xl absolute text-center pointer-events-none mx-2'
-        (click)="onToggleSidebar()" (keypress)="$event.preventDefault()"></i-tabler>
+      <i-tabler name="search" class='text-xl absolute text-center pointer-events-none mx-2
+        text-typography dark:text-typography-dark' (click)="onToggleSidebar()"
+        (keypress)="$event.preventDefault()"></i-tabler>
       <input
-        class="text-typography-light bg-[#1d1b31] font-normal text-base rounded-xl outline-none h-[40px] border-none w-full pl-9"
+        class="font-normal text-base rounded-xl outline-none h-[40px] border-none w-full pl-9
+      text-typography dark:text-typography-dark bg-sidebar-semi-light dark:bg-sidebar-semi-dark placeholder:text-typography dark:placeholder:text-typography-dark"
         type="text" placeholder="Search...">
     </li>
     }
