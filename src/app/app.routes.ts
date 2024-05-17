@@ -4,7 +4,8 @@ import { authGuard } from './guards/auth.guard';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./layouts/default/default.component').then((c) => c.DefaultComponent),
+    loadComponent: () => import('./layouts/vertical/vertical.component').then((c) => c.VerticalComponent),
+    //loadComponent: () => import('./layouts/default/default.component').then((c) => c.DefaultComponent),
     // canActivate: [authGuard],
     children: [
       {
@@ -39,7 +40,7 @@ export const routes: Routes = [
         path: 'calculations',
         loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
       },
-      //? AQUÍ SE DEFINE EL ENRUTAMIENTO DE LOS DISTNTOS COMPONENTES DEL SISTEMA
+      //? AQUÍ SE DEFINE EL ENRUTAMIENTO DE LOS DISTINTOS COMPONENTES DEL SISTEMA
       {
         path: '',
         redirectTo: '/dashboard',

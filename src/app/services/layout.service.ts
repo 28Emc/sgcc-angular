@@ -7,6 +7,8 @@ import { LayoutConfig, defaultConfig } from '../interfaces/ILayoutConfig.interfa
 export class LayoutService {
   config: LayoutConfig = defaultConfig;
   configS = signal(this.config);
+  readonly SIDEBAR_OPEN_WIDTH = '250px';
+  readonly SIDEBAR_COLLAPSED_WIDTH = '78px';
 
   constructor() {
     if (sessionStorage.getItem('config') !== null) {

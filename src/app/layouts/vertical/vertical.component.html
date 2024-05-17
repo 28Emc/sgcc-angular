@@ -1,0 +1,167 @@
+<main class="w-screen h-screen flex flex-col">
+
+  <section #sidebar class="bg-sidebar-light text-typography-light dark:bg-sidebar-dark dark:text-typography-dark
+    py-1.5 px-3.5 z-[99] h-screen absolute transition-all duration-300 w-[250px]" [ngClass]="{
+      'left-0': configS.sidebar.collapsed,
+      '-left-[250px]': !configS.sidebar.collapsed
+    }">
+
+    <div class="flex items-center justify-between gap-2 mt-2">
+      <div class="flex items-center justify-start gap-2">
+        <img [src]="configS.sidebar.imgSrc" alt="logo" class="rounded w-9 max-w-9">
+        <div class="text-typography-light font-semibold text-xl">
+          {{configS.sidebar.title}}
+        </div>
+      </div>
+    </div>
+
+    <ul class="mt-5 flex flex-col gap-3">
+
+      @if (configS.sidebar.search) {
+      <li class="list-none relative flex items-center">
+        <i class='bx bx-search text-typography-light text-xl absolute text-center pointer-events-none mx-2'
+          (click)="onToggleSidebar()" (keypress)="$event.preventDefault()"></i>
+        <input
+          class="text-typography-light bg-[#1d1b31] font-normal text-base rounded-xl outline-none h-[40px] border-none w-full pl-9"
+          type="text" placeholder="Search...">
+      </li>
+      }
+
+      @for (link of configS.sidebar.links; track $index) {
+      <li class="list-none">
+        <a class="flex rounded-lg items-center py-1.5 no-underline transition-all duration-200  bg-sidebar-light text-typography-light hover:bg-white hover:text-sidebar-light
+         cursor-pointer px-1.5 gap-3 group" [routerLink]="link.url">
+          <i class='transition-all ease-linear text-xl bx' [class]="link.icon!"></i>
+          <span class="font-normal text-base whitespace-normal pointer-events-none">
+            {{link.displayName}}
+          </span>
+        </a>
+      </li>
+      }
+
+    </ul>
+
+  </section>
+
+  <section #content class="h-screen absolute transition-all duration-300" [ngClass]="{
+    'left-[250px] w-[calc(100vw-250px)]': configS.sidebar.collapsed,
+    'left-0 w-screen': !configS.sidebar.collapsed
+  }">
+
+
+
+
+
+
+    <section #navbar class="flex items-center justify-between p-3 bg-content-light dark:bg-content-dark text-typography-default dark:text-typography-dark shadow-lg
+      dark:shadow-sm shadow-gray-200 dark:shadow-gray-800 transition-all duration-300">
+
+      <a id="nav-menu-mobile-btn" (click)="onToggleSidebar()">
+        <i #btn
+          class='text-center cursor-pointer text-typography-default dark:text-typography-dark text-2xl transition-all duration-300 bx'
+          [ngClass]="{
+            'bx-menu-alt-right': configS.sidebar.collapsed,
+            'bx-menu': !configS.sidebar.collapsed
+          }" id="btn"></i>
+      </a>
+
+      <div class="md:block hidden"></div>
+      <div class="flex items-center justify-end gap-5">
+
+        <a id="nav-dark-mode-btn" (click)="onToggleDarkMode()">
+          <i class=' text-typography-default dark:text-typography-dark transition-all duration-300 text-2xl cursor-pointer bx'
+            [ngClass]="{
+              'bx-sun': configS.darkMode,
+              'bx-moon': !configS.darkMode
+            }"></i>
+        </a>
+
+        <a id="nav-notifications-btn" (click)="onNotificationsClicked($event)" class="cursor-pointer relative">
+          <i class='text-typography-default dark:text-typography-dark transition-all duration-300 bx' [ngClass]="{
+              'bxs-bell-ring': notificationsUnread > 0,
+              'bx-bell': notificationsUnread === 0
+            }"></i>
+          @if (notificationsUnread > 0) {
+          <span
+            class="absolute -top-2.5 -right-2 min-w-5 min-h-5 flex items-center justify-center text-[0.70rem] px-1 rounded-full bg-primary-light text-typography-light">
+            {{notificationsUnread > 0 && notificationsUnread < 10 ? notificationsUnread : '9+' }} </span>
+              }
+              <div (clickOutside)="notificationsClicked = false" [ngClass]="{
+                  'transform opacity-0 scale-95 -z-10': !notificationsClicked,
+                  'transform opacity-100 scale-100 z-10': notificationsClicked
+                }" class="notificacion-content absolute mt-6 origin-top-right rounded-md bg-content-light dark:bg-content-dark py-1 shadow-lg focus:outline-none
+                  transition-all duration-300 w-96 right-0" role="menu" aria-orientation="vertical"
+                aria-labelledby="notification-button" tabindex="-1">
+                <div class="flex items-start">
+                  <span class="p-3 font-semibold">Notifications</span>
+                </div>
+                <hr class="text-typography-default">
+                <div class="max-h-[500px] overflow-y-auto">
+                  @for (noti of notificationList; track $index) {
+                  <a (click)="markNotificationAsRead(noti);"
+                    class="block px-4 py-3 text-typography-default dark:text-typography-dark hover:bg-typography-light hover:dark:bg-typography-default transition-all cursor-pointer"
+                    role="menuitem" tabindex="-1">
+                    <div class="flex items-center justify-center gap-3">
+                      <i class='transition-all min-w-[35px] text-[25px] bx' [class]="noti.icon" [ngClass]="{
+                      'text-teal-400 font-light' : noti.type === 'success',
+                      'text-cyan-400 font-light' : noti.type === 'info',
+                      'text-orange-400 font-light' : noti.type === 'warning',
+                      'text-red-400 font-light' : noti.type === 'error',
+                      'text-typography-default font-extralight opacity-40' : noti.read,
+                    }"></i>
+                      <div class="flex flex-col items-start">
+                        <span class="text-sm font-semibold" [ngClass]="{
+                        'opacity-40': noti.read
+                      }">{{noti.title}}</span>
+                        <p class="text-sm" [ngClass]="{
+                        'opacity-40': noti.read
+                      }">{{noti.description}}</p>
+                      </div>
+                    </div>
+                  </a>
+                  }
+                </div>
+              </div>
+        </a>
+
+        <a id="nav-user-btn" (click)="onUserAvatarClicked($event)" class="flex gap-3 cursor-pointer">
+          <div id="nav-user-info" class="flex flex-col items-end">
+            <span
+              class="text-typography-default dark:text-typography-dark text-sm font-semibold">{{currentUser.username}}</span>
+            <span
+              class="text-typography-default dark:text-typography-dark text-xs font-light">{{currentUser.role}}</span>
+          </div>
+          <div class="relative">
+            <div class="relative flex max-w-xs items-center rounded-full text-sm focus:outline-none">
+              <img class="h-8 w-8 rounded-full" [src]="currentUser.avatar ?? 'https://placehold.co/32x32?text=I'"
+                alt="avatar">
+              <span class='rounded-[50%] absolute w-2.5 h-2.5 right-0 bottom-0 bg-green-500'></span>
+            </div>
+            <div (clickOutside)="avatarClicked = false" [ngClass]="{
+          'transform opacity-0 scale-95 -z-10': !avatarClicked,
+          'transform opacity-100 scale-100 z-10': avatarClicked,
+        }" class="absolute right-0 mt-6 w-56 origin-top-right rounded-md bg-content-light dark:bg-content-dark py-1 shadow-lg focus:outline-none transition ease-out duration-100"
+              role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+              <a routerLink="/profile"
+                class="block px-4 py-2 text-sm text-typography-default dark:text-typography-dark hover:bg-typography-light hover:dark:bg-typography-default transition-all cursor-pointer"
+                role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+              <a routerLink="/settings"
+                class="block px-4 py-2 text-sm text-typography-default dark:text-typography-dark hover:bg-typography-light hover:dark:bg-typography-default transition-all cursor-pointer"
+                role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+              <hr class="text-typography-light">
+              <a routerLink="/auth/login"
+                class="block px-4 py-2 text-sm text-typography-default dark:text-typography-dark hover:bg-typography-light hover:dark:bg-typography-default transition-all cursor-pointer"
+                role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+            </div>
+          </div>
+        </a>
+
+      </div>
+
+    </section>
+
+    <router-outlet></router-outlet>
+
+  </section>
+
+</main>

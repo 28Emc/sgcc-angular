@@ -174,7 +174,7 @@ module.exports = {
       },
       'typography': {
         'light': '#F6F5FF',
-        'default': '#707070',
+        'default': '#212121',
         'dark': '#CCC'
       },
       'body': {
@@ -182,8 +182,8 @@ module.exports = {
         'dark': '#18191A'
       },
       'sidebar': {
-        'light': '#FFF',
-        'dark': '#242526'
+        'light': '#11101D',
+        'dark': '#11101D'
       },
       'content': {
         'light': '#FFF',

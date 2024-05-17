@@ -24,7 +24,7 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
 })
 export class DefaultComponent implements OnInit, AfterViewInit {
   @ViewChild('sidebar', { static: true }) sidebar!: ElementRef<HTMLElement>;
-  @ViewChild('main', { static: true }) main!: ElementRef;
+  @ViewChild('main', { static: true }) main!: ElementRef<HTMLElement>;
   /* @ViewChild('navbar', { static: true }) navbar!: ElementRef;
   @ViewChild('content', { static: true }) content!: ElementRef; */
   readonly SIDEBAR_OPEN_WIDTH = '250px';
