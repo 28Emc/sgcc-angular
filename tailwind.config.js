@@ -163,31 +163,30 @@ module.exports = {
       pink: colors.pink,
       rose: colors.rose,
       'primary': {
-        '50': colors.orange[50],
-        '200': colors.orange[200],
-        'light': colors.orange[400],
-        'dark': '#3A3B3C'
+        'light': colors.orange[200],
+        DEFAULT: colors.orange[500],
+        'dark': colors.orange[800]
       },
       'body': {
-        'light': '#E2E8F0',
-        'dark': '#18191A'
+        'light': '#F1F5F9',
+        'dark': '#242526'
       },
       'navbar': {
-        'light': '#F1F5F9',
+        'light': '#FFFFFF',
         'semi-light': '#CBD5E1',
         'semi-dark': '#1F2937',
         'dark': '#0F172A'
       },
       'sidebar': {
-        'light': '#F1F5F9',
+        'light': '#FFFFFF',
         'semi-light': '#CBD5E1',
         DEFAULT: '#B0C0D6',
         'semi-dark': '#1F2937',
-        'dark': '#11101D'
+        'dark': '#0F172A'
       },
       'content': {
         'light': '#FFF',
-        'dark': '#242526'
+        'dark': '#0F172A'
       },
       'title': {
         'light': '#707070',

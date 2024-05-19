@@ -175,7 +175,7 @@ export const defaultConfig: LayoutConfig = {
   sidebar: {
     title: 'SGCC',
     imgSrc: 'assets/img/logo_1.webp',
-    search: true,
+    search: false,
     collapsed: false,
     userInfo: {
       visible: true,
@@ -196,86 +196,13 @@ export const defaultConfig: LayoutConfig = {
       {
         id: 2,
         parentId: 0,
-        type: 'link',
-        name: 'Housings',
-        displayName: 'Housings',
-        icon: 'building',
-        url: '/housings'
-      },
-      {
-        id: 3,
-        parentId: 0,
-        type: 'link',
-        name: 'Rooms',
-        displayName: 'Rooms',
-        icon: 'door',
-        url: '/rooms'
-      },
-      {
-        id: 4,
-        parentId: 0,
-        type: 'link',
-        name: 'Tenants',
-        displayName: 'Tenants',
-        icon: 'users-group',
-        url: '/tenants'
-      },
-      {
-        id: 5,
-        parentId: 0,
-        type: 'link',
-        name: 'Receipts',
-        displayName: 'Receipts',
-        icon: 'receipt-2',
-        url: '/receipts'
-      },
-      {
-        id: 6,
-        parentId: 0,
-        type: 'link',
-        name: 'Measuring Devices',
-        displayName: 'Measuring Devices',
-        icon: 'devices-search',
-        url: '/measuring-devices'
-      },
-      {
-        id: 7,
-        parentId: 0,
-        type: 'link',
-        name: 'Measuring Device Readings',
-        displayName: 'Readings',
-        icon: 'number-123',
-        url: '/measuring-device-readings'
-      },
-      {
-        id: 8,
-        parentId: 0,
-        type: 'link',
-        name: 'Tenant Calculations',
-        displayName: 'Calculations',
-        icon: 'calculator',
-        url: '/calculations',
-      },
-      //? TEST
-      {
-        id: 100,
-        parentId: 0,
-        type: 'link',
-        name: 'Dashboard',
-        displayName: 'Dashboard',
-        icon: 'layout-dashboard',
-        url: '/dashboard'
-      },
-      {
-        id: 200,
-        parentId: 0,
         type: 'title',
         name: 'Catalog',
         displayName: 'Catalog',
         children: [
           {
-            id: 300,
-            parentId: 200,
+            id: 3,
+            parentId: 2,
             type: 'link',
             name: 'Housings',
             displayName: 'Housings',
@@ -283,8 +210,8 @@ export const defaultConfig: LayoutConfig = {
             url: '/housings'
           },
           {
-            id: 400,
-            parentId: 200,
+            id: 4,
+            parentId: 2,
             type: 'link',
             name: 'Rooms',
             displayName: 'Rooms',
@@ -292,8 +219,8 @@ export const defaultConfig: LayoutConfig = {
             url: '/rooms'
           },
           {
-            id: 500,
-            parentId: 200,
+            id: 5,
+            parentId: 2,
             type: 'link',
             name: 'Tenants',
             displayName: 'Tenants',
@@ -301,29 +228,17 @@ export const defaultConfig: LayoutConfig = {
             url: '/tenants'
           },
           {
-            id: 500,
-            parentId: 200,
-            type: 'dropdown',
+            id: 6,
+            parentId: 2,
+            type: 'link',
             name: 'Receipts',
             displayName: 'Receipts',
             icon: 'receipt-2',
-            isOpen: false,
-            deep: 1,
-            children: [
-              {
-                id: 600,
-                parentId: 500,
-                type: 'link',
-                name: 'Receipts 1',
-                displayName: 'Receipts 1',
-                icon: 'receipt-2',
-                url: '/receipts-1'
-              },
-            ]
+            url: '/receipts'
           },
           {
-            id: 700,
-            parentId: 200,
+            id: 7,
+            parentId: 2,
             type: 'link',
             name: 'Measuring Devices',
             displayName: 'Measuring Devices',
@@ -331,8 +246,8 @@ export const defaultConfig: LayoutConfig = {
             url: '/measuring-devices'
           },
           {
-            id: 800,
-            parentId: 200,
+            id: 8,
+            parentId: 2,
             type: 'link',
             name: 'Measuring Device Readings',
             displayName: 'Readings',
@@ -342,48 +257,23 @@ export const defaultConfig: LayoutConfig = {
         ]
       },
       {
-        id: 900,
+        id: 9,
         parentId: 0,
         type: 'title',
         name: 'Operations',
         displayName: 'Operations',
         children: [
           {
-            id: 1000,
-            parentId: 900,
-            type: 'dropdown',
+            id: 10,
+            parentId: 9,
+            type: 'link',
             name: 'Tenant Calculations',
             displayName: 'Calculations',
             icon: 'calculator',
-            isOpen: false,
-            deep: 1,
-            children: [
-              {
-                id: 1200,
-                parentId: 1000,
-                type: 'dropdown',
-                name: 'Tenant Calculations 2',
-                displayName: 'Calculations 2',
-                icon: 'calculator',
-                isOpen: false,
-                deep: 2,
-                children: [
-                  {
-                    id: 1300,
-                    parentId: 1200,
-                    type: 'link',
-                    name: 'Tenant Calculations 3',
-                    displayName: 'Calculations 3',
-                    icon: 'calculator',
-                    url: '/calculations-3',
-                  }
-                ]
-              }
-            ]
+            url: '/calculations'
           }
         ]
       }
-      //? FIN TEST
     ]
   },
   navbar: {

@@ -1,6 +1,6 @@
 @switch (link.type) {
 @case ('title') {
-<li class="list-none mt-3 mb-1">
+<li class="list-none mt-2 my-2">
   <a
     class="transition-all duration-200 pointer-events-none flex items-center justify-start pl-2 rounded-md no-underline">
     <span
@@ -16,62 +16,66 @@
 @case ('dropdown') {
 <li class="list-none relative" (click)="onClickChild(link)">
   <a class="flex items-center rounded-lg py-2.5 px-1.5 no-underline transition-all duration-200 cursor-pointer gap-2.5 group
-  text-typography hover:bg-sidebar-dark hover:text-typography-light dark:text-typography-dark hover:dark:bg-sidebar-light hover:dark:text-typography {{customCss.join('')}}"
+  text-typography bg-sidebar-light dark:text-typography-dark dark:bg-sidebar-dark {{customCss.join('')}}"
     [routerLink]="link.url">
-    @if (link.deep && link.deep <= 1) { <i-tabler [name]="link.icon!" class='transition-all duration-200 text-xl'>
+    @if (link.deep && link.deep <= 1) { <i-tabler [name]="link.icon!"
+      class='transition-all duration-200 group-hover:translate-x-1'>
       </i-tabler>
       }
-      <span class="font-normal text-base whitespace-normal pointer-events-none">
+      <span
+        class="font-normal text-base whitespace-normal pointer-events-none transition-all duration-200 group-hover:translate-x-1">
         {{link.displayName}}
       </span>
       @if (configS.sidebar.collapsed) {
-      <i-tabler [name]="link.isOpen ? 'chevron-up' : 'chevron-down'"
-        class='absolute top-3 right-1 transition-all duration-200 cursor-pointer'></i-tabler>
+      <i-tabler [name]="link.isOpen ? 'chevron-down' : 'chevron-right'"
+        class='absolute top-3 right-2 transition-all duration-200 cursor-pointer dropdown-tabler-icon'></i-tabler>
       }
   </a>
 </li>
 
-<div class="bg-sidebar-semi-light dark:bg-sidebar-semi-dark">
-  @if (link.children) {
+@if (link.children) {
 
-  @for (child1st of link.children; track $index) {
+@for (child1st of link.children; track $index) {
 
-  @if (link.isOpen) {
-  <app-sidebar-item [link]="child1st" [showIcon]="false" [customCss]="['pl-10']" [ngClass]="{
+@if (link.isOpen) {
+<app-sidebar-item [link]="child1st" [showIcon]="false" [customCss]="['pl-10']" [ngClass]="{
     'block animate-fade animate-once animate-duration-100': link.isOpen,
     'hidden': !link.isOpen,
   }"></app-sidebar-item>
-  }
+}
 
-  @if (child1st.children) {
+@if (child1st.children) {
 
-  @for (child2nd of child1st.children; track $index) {
+@for (child2nd of child1st.children; track $index) {
 
-  @if (child2nd.isOpen) {
-  <app-sidebar-item [link]="child2nd" [showIcon]="false" [customCss]="['pl-10']" [ngClass]="{
+@if (child2nd.isOpen) {
+<app-sidebar-item [link]="child2nd" [showIcon]="false" [customCss]="['pl-10']" [ngClass]="{
       'block animate-fade animate-once animate-duration-100': child2nd.isOpen,
       'hidden': !child2nd.isOpen,
     }"></app-sidebar-item>
-  }
+}
 
-  }
+}
 
-  }
+}
 
-  }
+}
 
-  }
-</div>
+}
+
 }
 @case ('link') {
-<li class="list-none">
+<li class="list-none my-2">
   <a class="flex rounded-lg items-center py-2.5 px-1.5 no-underline transition-all duration-200 cursor-pointer gap-2.5 group
-  text-typography hover:bg-sidebar-dark hover:text-typography-light dark:text-typography-dark hover:dark:bg-sidebar-light hover:dark:text-typography {{customCss.join('')}}"
-    [routerLink]="link.url">
+   {{customCss.join('')}}" [ngClass]="{
+    'bg-primary text-typography-light dark:bg-primary dark:text-typography-light shadow-md shadow-primary' : isActiveRoute(link.url!),
+    'text-typography bg-sidebar-light dark:text-typography-dark dark:bg-sidebar-dark' : !isActiveRoute(link.url!)
+  }" [routerLink]="link.url">
     @if (showIcon) {
-    <i-tabler [name]="link.icon!" class='transition-all duration-200 text-xl'></i-tabler>
+    <i-tabler [name]="link.icon!" class='text-xl transition-all duration-200 group-hover:translate-x-1'></i-tabler>
     }
-    <span class="font-normal text-base whitespace-normal pointer-events-none">
+    <span
+      class="font-normal text-base whitespace-normal pointer-events-none transition-all duration-200 group-hover:translate-x-1">
       {{link.displayName}}
     </span>
   </a>

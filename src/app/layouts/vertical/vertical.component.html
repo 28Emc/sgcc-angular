@@ -1,16 +1,18 @@
-<main class="flex flex-col">
+<main class="flex">
 
   <app-sidebar></app-sidebar>
 
-  <section #content class="h-screen absolute transition-all duration-300" [ngClass]="{
+  <section #content class="h-screen absolute transition-all duration-300 bg-body-light dark:bg-body-dark" [ngClass]="{
     'left-[250px] w-[calc(100vw-250px)]': configS.sidebar.collapsed,
     'left-0 w-screen': !configS.sidebar.collapsed
   }">
 
-    <app-navbar></app-navbar>
+    <div class="px-6 py-3 flex flex-col gap-3">
+      <app-navbar></app-navbar>
 
-    <div #container class="transition-all duration-300 p-3 bg-content-light dark:bg-content-dark">
-      <router-outlet></router-outlet>
+      <div #container class="transition-all duration-300">
+        <router-outlet></router-outlet>
+      </div>
     </div>
 
   </section>
