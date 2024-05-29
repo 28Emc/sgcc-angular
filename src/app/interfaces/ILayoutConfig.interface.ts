@@ -188,8 +188,8 @@ export const defaultConfig: LayoutConfig = {
         id: 1,
         parentId: 0,
         type: 'link',
-        name: 'Dashboard',
-        displayName: 'Dashboard',
+        name: 'Inicio',
+        displayName: 'Inicio',
         icon: 'layout-dashboard',
         url: '/dashboard'
       },
@@ -197,15 +197,15 @@ export const defaultConfig: LayoutConfig = {
         id: 2,
         parentId: 0,
         type: 'title',
-        name: 'Catalog',
-        displayName: 'Catalog',
+        name: 'Catálogo',
+        displayName: 'Catálogo',
         children: [
           {
             id: 3,
             parentId: 2,
             type: 'link',
-            name: 'Housings',
-            displayName: 'Housings',
+            name: 'Edificios',
+            displayName: 'Edificios',
             icon: 'building',
             url: '/housings'
           },
@@ -213,8 +213,8 @@ export const defaultConfig: LayoutConfig = {
             id: 4,
             parentId: 2,
             type: 'link',
-            name: 'Rooms',
-            displayName: 'Rooms',
+            name: 'Departamentos',
+            displayName: 'Departamentos',
             icon: 'door',
             url: '/rooms'
           },
@@ -222,8 +222,8 @@ export const defaultConfig: LayoutConfig = {
             id: 5,
             parentId: 2,
             type: 'link',
-            name: 'Tenants',
-            displayName: 'Tenants',
+            name: 'Inquilinos',
+            displayName: 'Inquilinos',
             icon: 'users-group',
             url: '/tenants'
           },
@@ -231,8 +231,8 @@ export const defaultConfig: LayoutConfig = {
             id: 6,
             parentId: 2,
             type: 'link',
-            name: 'Receipts',
-            displayName: 'Receipts',
+            name: 'Recibos',
+            displayName: 'Recibos',
             icon: 'receipt-2',
             url: '/receipts'
           },
@@ -240,8 +240,8 @@ export const defaultConfig: LayoutConfig = {
             id: 7,
             parentId: 2,
             type: 'link',
-            name: 'Measuring Devices',
-            displayName: 'Measuring Devices',
+            name: 'Medidores',
+            displayName: 'Medidores',
             icon: 'devices-search',
             url: '/measuring-devices'
           },
@@ -249,8 +249,8 @@ export const defaultConfig: LayoutConfig = {
             id: 8,
             parentId: 2,
             type: 'link',
-            name: 'Measuring Device Readings',
-            displayName: 'Readings',
+            name: 'Lecturas',
+            displayName: 'Lecturas',
             icon: 'number-123',
             url: '/measuring-device-readings'
           }
@@ -260,15 +260,15 @@ export const defaultConfig: LayoutConfig = {
         id: 9,
         parentId: 0,
         type: 'title',
-        name: 'Operations',
-        displayName: 'Operations',
+        name: 'Operaciones',
+        displayName: 'Operaciones',
         children: [
           {
             id: 10,
             parentId: 9,
             type: 'link',
-            name: 'Tenant Calculations',
-            displayName: 'Calculations',
+            name: 'Cálculos',
+            displayName: 'Cálculos',
             icon: 'calculator',
             url: '/calculations'
           }

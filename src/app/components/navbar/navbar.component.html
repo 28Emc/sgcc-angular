@@ -1,22 +1,22 @@
 <section #navbar class="flex items-center justify-between p-3 rounded transition-all duration-300
-   bg-navbar-light dark:bg-navbar-dark shadow-sm shadow-slate-300 dark:shadow-navbar-dark">
+   bg-navbar-light dark:bg-navbar-dark shadow-sm shadow-navbar-semi-light dark:shadow-navbar-semi-dark">
 
   <a id="nav-menu-mobile-btn" (click)="onToggleSidebar()">
-    <i-tabler [name]="configS.sidebar.collapsed ? 'menu-deep' : 'menu-2'" class='text-center cursor-pointer text-2xl transition-all duration-200 hover:scale-110
-        text-typography dark:text-typography-dark'></i-tabler>
+    <i-tabler [name]="configS.sidebar.collapsed ? 'menu-deep' : 'menu-2'" class='text-center cursor-pointer text-xl transition-all duration-200 hover:scale-110
+        text-icon-light dark:text-icon-dark'></i-tabler>
   </a>
 
   <div class="flex items-center justify-end gap-5">
 
     <a id="nav-dark-mode-btn" (click)="onToggleDarkMode()">
-      <i-tabler [name]="configS.darkMode ? 'sun' : 'moon'" class='transition-all duration-200 hover:scale-110 text-2xl cursor-pointer
-           text-typography dark:text-typography-dark'></i-tabler>
+      <i-tabler [name]="configS.darkMode ? 'sun' : 'moon'" class='transition-all duration-200 hover:scale-110 text-xl cursor-pointer
+           text-icon-light dark:text-icon-dark'></i-tabler>
     </a>
 
     <a id="nav-notifications-btn" (click)="onNotificationsClicked($event)"
       class="cursor-pointer relative transition-all duration-200 hover:scale-110">
       <i-tabler [name]="notificationsUnread > 0 ? 'bell-ringing' : 'bell'"
-        class='transition-all duration-300 text-2xl text-typography dark:text-typography-dark'></i-tabler>
+        class='transition-all duration-300 text-xl text-icon-light dark:text-icon-dark'></i-tabler>
       @if (notificationsUnread > 0) {
       <span class="absolute -top-2 -right-2 min-w-5 min-h-5 flex items-center justify-center text-[0.70rem] px-1 rounded-full
            bg-red-500 text-typography-light">
@@ -28,19 +28,18 @@
     <div #navNotificationsContainer (clickOutside)="notificationsClicked = false" [ngClass]="{
                     'transform opacity-0 scale-95 -z-10': !notificationsClicked,
                     'transform opacity-100 scale-100 z-10': notificationsClicked
-                  }" class="absolute mt-6 origin-top-right rounded-md pt-1 shadow-lg focus:outline-none
-                    transition-all duration-300 w-96 right-52 top-14 bg-navbar-light dark:bg-navbar-dark" role="menu"
-      aria-orientation="vertical" aria-labelledby="notification-button" tabindex="-1">
+                  }"
+      class="absolute mt-6 origin-top-right rounded-md pt-1 shadow-lg focus:outline-none
+                    transition-all duration-300 sm:w-96 max-w-[calc(100%-48px)] right-6 top-14 bg-navbar-light dark:bg-navbar-dark"
+      role="menu" aria-orientation="vertical" aria-labelledby="notification-button" tabindex="-1">
       <div class="flex items-start">
-        <span class="p-3 font-semibold text-typography dark:text-typography-dark">Notifications</span>
+        <span class="p-3 font-normal text-typography dark:text-typography-dark">Notifications</span>
       </div>
       <hr class="text-typography dark:text-typography-dark">
       <div class="max-h-80 overflow-y-auto">
         @for (noti of notificationList; track $index) {
-        <a (click)="markNotificationAsRead(noti);"
-          class="block px-4 py-3 transition-all cursor-pointer
-          text-typography hover:bg-navbar-dark hover:text-typography-light dark:text-typography-dark hover:dark:bg-navbar-light hover:dark:text-typography"
-          [ngClass]="{
+        <a (click)="markNotificationAsRead(noti);" class="block px-4 py-3 transition-all cursor-pointer
+          hover:bg-navbar-dark hover:dark:bg-navbar-light group" [ngClass]="{
               'rounded-none' : $index > 0,
               'rounded-b' : $index === notificationList.length - 1
             }" role="menuitem" tabindex="-1">
@@ -50,13 +49,16 @@
                         'text-sky-400' : noti.type === 'info',
                         'text-orange-400' : noti.type === 'warning',
                         'text-red-400' : noti.type === 'error',
-                        'text-typography opacity-40' : noti.read,
+                        'text-icon-light dark:text-icon-dark opacity-40' : noti.read,
                       }"></i-tabler>
             <div class="flex flex-col items-start">
-              <span class="text-sm font-semibold" [ngClass]="{
+              <span
+                class="text-sm font-semibold text-typography group-hover:text-typography-light dark:text-typography-dark group-hover:dark:text-typography"
+                [ngClass]="{
                           'opacity-40': noti.read
                         }">{{noti.title}}</span>
-              <p class="text-sm" [ngClass]="{
+              <p class="text-sm text-typography group-hover:text-typography-light dark:text-typography-dark group-hover:dark:text-typography"
+                [ngClass]="{
                           'opacity-40': noti.read
                         }">{{noti.description}}</p>
             </div>
@@ -68,8 +70,10 @@
 
     <a id="nav-user-btn" (click)="onUserAvatarClicked($event)" class="flex gap-3 cursor-pointer">
       <div id="nav-user-info" class="flex flex-col items-end">
-        <span class="text-sm font-semibold text-typography dark:text-typography-dark">{{currentUser.username}}</span>
-        <span class="text-xs font-light text-typography dark:text-typography-dark">{{currentUser.role}}</span>
+        <span
+          class="xs:block hidden text-sm font-normal text-typography dark:text-typography-dark">{{currentUser.username}}</span>
+        <span
+          class="xs:block hidden text-xs font-light text-typography dark:text-typography-dark">{{currentUser.role}}</span>
       </div>
       <div class="relative">
         <div class="relative flex max-w-xs items-center rounded-full text-sm focus:outline-none">

@@ -4,7 +4,7 @@
   <a
     class="transition-all duration-200 pointer-events-none flex items-center justify-start pl-2 rounded-md no-underline">
     <span
-      class="transition-all duration-200 font-medium whitespace-nowrap text-md text-typography dark:text-typography-dark">
+      class="transition-all duration-200 text-sm font-normal whitespace-nowrap text-typography dark:text-typography-dark opacity-50">
       {{displayLinkName(link) | uppercase}}
     </span>
   </a>
@@ -16,19 +16,18 @@
 @case ('dropdown') {
 <li class="list-none relative" (click)="onClickChild(link)">
   <a class="flex items-center rounded-lg py-2.5 px-1.5 no-underline transition-all duration-200 cursor-pointer gap-2.5 group
-  text-typography bg-sidebar-light dark:text-typography-dark dark:bg-sidebar-dark {{customCss.join('')}}"
-    [routerLink]="link.url">
+   bg-sidebar-light  dark:bg-sidebar-dark {{customCss.join('')}}" [routerLink]="link.url">
     @if (link.deep && link.deep <= 1) { <i-tabler [name]="link.icon!"
-      class='transition-all duration-200 group-hover:translate-x-1'>
+      class='transition-all duration-200 group-hover:translate-x-1 text-icon-light dark:text-icon-dark'>
       </i-tabler>
       }
       <span
-        class="font-normal text-base whitespace-normal pointer-events-none transition-all duration-200 group-hover:translate-x-1">
+        class="font-normal text-base whitespace-normal pointer-events-none transition-all duration-200 group-hover:translate-x-1 text-typography-light dark:text-typography-dark">
         {{link.displayName}}
       </span>
       @if (configS.sidebar.collapsed) {
       <i-tabler [name]="link.isOpen ? 'chevron-down' : 'chevron-right'"
-        class='absolute top-3 right-2 transition-all duration-200 cursor-pointer dropdown-tabler-icon'></i-tabler>
+        class='absolute top-3 right-2 transition-all duration-200 cursor-pointer dropdown-tabler-icon text-icon-light dark:text-icon-dark'></i-tabler>
       }
   </a>
 </li>
@@ -68,14 +67,21 @@
 <li class="list-none my-2">
   <a class="flex rounded-lg items-center py-2.5 px-1.5 no-underline transition-all duration-200 cursor-pointer gap-2.5 group
    {{customCss.join('')}}" [ngClass]="{
-    'bg-primary text-typography-light dark:bg-primary dark:text-typography-light shadow-md shadow-primary' : isActiveRoute(link.url!),
-    'text-typography bg-sidebar-light dark:text-typography-dark dark:bg-sidebar-dark' : !isActiveRoute(link.url!)
+    'bg-primary dark:bg-primary shadow-md shadow-primary' : isActiveRoute(link.url!),
+    'bg-sidebar-light dark:bg-sidebar-dark' : !isActiveRoute(link.url!)
   }" [routerLink]="link.url">
     @if (showIcon) {
-    <i-tabler [name]="link.icon!" class='text-xl transition-all duration-200 group-hover:translate-x-1'></i-tabler>
+    <i-tabler [name]="link.icon!" class='text-xl transition-all duration-200 group-hover:translate-x-1' [ngClass]="{
+        'text-icon' : isActiveRoute(link.url!),
+        'text-icon-light dark:text-icon-dark' : !isActiveRoute(link.url!)
+      }"></i-tabler>
     }
     <span
-      class="font-normal text-base whitespace-normal pointer-events-none transition-all duration-200 group-hover:translate-x-1">
+      class="font-light text-base whitespace-normal pointer-events-none transition-all duration-200 group-hover:translate-x-1"
+      [ngClass]="{
+        'text-typography-light dark:text-typography-light' : isActiveRoute(link.url!),
+        'text-typography dark:text-typography-dark' : !isActiveRoute(link.url!)
+      }">
       {{link.displayName}}
     </span>
   </a>
