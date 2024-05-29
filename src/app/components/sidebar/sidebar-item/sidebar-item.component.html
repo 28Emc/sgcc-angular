@@ -25,7 +25,7 @@
         class="font-normal text-base whitespace-normal pointer-events-none transition-all duration-200 group-hover:translate-x-1 text-typography-light dark:text-typography-dark">
         {{link.displayName}}
       </span>
-      @if (configS.sidebar.collapsed) {
+      @if (configS.sidebar.opened) {
       <i-tabler [name]="link.isOpen ? 'chevron-down' : 'chevron-right'"
         class='absolute top-3 right-2 transition-all duration-200 cursor-pointer dropdown-tabler-icon text-icon-light dark:text-icon-dark'></i-tabler>
       }

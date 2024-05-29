@@ -27,4 +27,9 @@ export class VerticalComponent implements OnInit {
       document.body.classList.toggle('dark');
     }
   }
+
+  onToggleSidebar(): void {
+    this.configS.sidebar.opened = !this.configS.sidebar.opened;
+    this.layoutService.persistConfig(this.configS);
+  }
 }

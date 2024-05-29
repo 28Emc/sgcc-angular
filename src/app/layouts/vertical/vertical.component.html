@@ -3,11 +3,11 @@
   <app-sidebar></app-sidebar>
 
   <section #content class="h-screen absolute transition-all duration-300 bg-body-light dark:bg-body-dark" [ngClass]="{
-    'left-[250px] w-[calc(100vw-250px)]': configS.sidebar.collapsed,
-    'left-0 w-screen': !configS.sidebar.collapsed
+    'sm:left-[250px] sm:w-[calc(100vw-250px)] w-full sm:opacity-100 sm:dark:opacity-100 opacity-35 dark:opacity-50 pointer-events-none sm:pointer-events-auto': configS.sidebar.opened,
+    'left-0 w-screen': !configS.sidebar.opened
   }">
 
-    <div class="px-6 py-3 flex flex-col gap-3">
+    <div class="px-6 py-3 flex flex-col gap-3 transition-all duration-300">
       <app-navbar></app-navbar>
 
       <div #container class="transition-all duration-300">

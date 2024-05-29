@@ -2,7 +2,7 @@
    bg-navbar-light dark:bg-navbar-dark shadow-sm shadow-navbar-semi-light dark:shadow-navbar-semi-dark">
 
   <a id="nav-menu-mobile-btn" (click)="onToggleSidebar()">
-    <i-tabler [name]="configS.sidebar.collapsed ? 'menu-deep' : 'menu-2'" class='text-center cursor-pointer text-xl transition-all duration-200 hover:scale-110
+    <i-tabler [name]="configS.sidebar.opened ? 'menu-deep' : 'menu-2'" class='text-center cursor-pointer text-xl transition-all duration-200 hover:scale-110
         text-icon-light dark:text-icon-dark'></i-tabler>
   </a>
 
@@ -26,8 +26,8 @@
     </a>
 
     <div #navNotificationsContainer (clickOutside)="notificationsClicked = false" [ngClass]="{
-                    'transform opacity-0 scale-95 -z-10': !notificationsClicked,
-                    'transform opacity-100 scale-100 z-10': notificationsClicked
+                    'transform opacity-100 scale-100 z-10': notificationsClicked,
+                    'transform opacity-0 scale-95 -z-10': !notificationsClicked
                   }"
       class="absolute mt-6 origin-top-right rounded-md pt-1 shadow-lg focus:outline-none
                     transition-all duration-300 sm:w-96 max-w-[calc(100%-48px)] right-6 top-14 bg-navbar-light dark:bg-navbar-dark"
@@ -84,8 +84,8 @@
     </a>
 
     <div #navUserContainer (clickOutside)="avatarClicked = false;" [ngClass]="{
-            'transform opacity-0 scale-95 -z-10': !avatarClicked,
             'transform opacity-100 scale-100 z-10': avatarClicked,
+            'transform opacity-0 scale-95 -z-10': !avatarClicked
           }" class="absolute right-6 top-14 mt-6 w-56 max-h-80 overflow-y-auto origin-top-right rounded-md shadow-lg focus:outline-none transition ease-out duration-100
          bg-navbar-light dark:bg-navbar-dark" role="menu" aria-orientation="vertical"
       aria-labelledby="user-menu-button" tabindex="-1">

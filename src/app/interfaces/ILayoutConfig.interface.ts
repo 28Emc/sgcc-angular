@@ -8,7 +8,7 @@ export interface ISidebar {
   title: string;
   imgSrc: string;
   search: boolean;
-  collapsed: boolean;
+  opened: boolean;
   userInfo: IUserInfo;
   links: ILink[];
 }
@@ -50,7 +50,7 @@ export class Sidebar implements ISidebar {
   title: string = '';
   imgSrc: string = '';
   search: boolean = false;
-  collapsed: boolean = false;
+  opened: boolean = false;
   userInfo: UserInfo = {
     visible: false,
     avatar: '',
@@ -147,7 +147,7 @@ export class LayoutConfig implements ILayoutConfig {
     title: '',
     imgSrc: '',
     search: false,
-    collapsed: false,
+    opened: false,
     userInfo: {
       visible: false,
       avatar: '',
@@ -176,7 +176,7 @@ export const defaultConfig: LayoutConfig = {
     title: 'SGCC',
     imgSrc: 'assets/img/logo_1.webp',
     search: false,
-    collapsed: false,
+    opened: false,
     userInfo: {
       visible: true,
       avatar: 'https://picsum.photos/200',

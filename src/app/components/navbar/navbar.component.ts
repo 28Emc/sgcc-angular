@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onToggleSidebar(): void {
-    this.configS.sidebar.collapsed = !this.configS.sidebar.collapsed;
+    this.configS.sidebar.opened = !this.configS.sidebar.opened;
     this.layoutService.persistConfig(this.configS);
   }
 
