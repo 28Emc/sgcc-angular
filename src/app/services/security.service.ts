@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { environment } from '../../environments/environment';
 import SecureLS from 'secure-ls';
 import { Observable, map, of } from 'rxjs';
@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class SecurityService {
+  http: HttpClient = inject(HttpClient);
+  router: Router = inject(Router);
   readonly baseURL: string = environment.baseURL;
   secureStorage = new SecureLS({
     encodingType: 'AES',
@@ -16,13 +18,18 @@ export class SecurityService {
     isCompression: true
   });
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-  ) { }
+  constructor() { }
 
   isUserLoggedIn(): Observable<boolean> {
     return of(this.secureStorage.get('tkn'));
+  }
+
+  setItem(key: string, data: any): void {
+    this.secureStorage.set(key, data);
+  }
+
+  getItem(key: string): any {
+    return this.secureStorage.get(key);
   }
 
   refreshToken(): Observable<any> {

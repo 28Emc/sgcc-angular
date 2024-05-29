@@ -9,8 +9,8 @@ export const JwtInterceptorService: HttpInterceptorFn = (
   req: HttpRequest<any>,
   next: HttpHandlerFn
 ) => {
-  const securityService = inject(SecurityService);
-  const router = inject(Router);
+  const securityService: SecurityService = inject(SecurityService);
+  const router: Router = inject(Router);
   let hasTokenBeenUpdated: boolean = false;
   let accessTokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   let request = req;

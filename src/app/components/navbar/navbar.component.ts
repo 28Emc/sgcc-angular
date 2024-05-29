@@ -5,6 +5,9 @@ import { LayoutService } from '../../services/layout.service';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { RouterModule } from '@angular/router';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive';
+import { NotificationService } from '../../services/notification.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { INavbarNotification } from '../../interfaces/INavbarNotification.interface';
 
 @Component({
   selector: 'app-navbar',
@@ -20,12 +23,14 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
 })
 export class NavbarComponent implements OnInit {
   layoutService: LayoutService = inject(LayoutService);
+  notificationService: NotificationService = inject(NotificationService);
   configS: LayoutConfig = this.layoutService.configS();
   notificationsClicked: boolean = false;
-  notificationList: any[] = [];
+  notificationList: INavbarNotification[] = [];
   notificationsUnread: number = 0;
   avatarClicked: boolean = false;
   currentUser: any = null;
+  loading: boolean = false;
 
   ngOnInit(): void {
     if (this.configS.darkMode) {
@@ -48,19 +53,19 @@ export class NavbarComponent implements OnInit {
   }
 
   getNotifications(): void {
-    this.notificationList = [
-      { id: 1, type: 'success', icon: 'circle-check', title: 'Notification 1', description: 'This is a success notification type text description. For testing purposes.', read: false },
-      { id: 2, type: 'info', icon: 'info-circle', title: 'Notification 2', description: 'This is a info notification type text description. For testing purposes.', read: false },
-      { id: 3, type: 'warning', icon: 'alert-triangle', title: 'Notification 3', description: 'This is a danger notification type text description. For testing purposes.', read: false },
-      { id: 4, type: 'error', icon: 'exclamation-circle', title: 'Notification 4', description: 'This is a error notification type text description. For testing purposes.', read: false },
-      { id: 5, type: 'success', icon: 'circle-check', title: 'Notification 5', description: 'This is a success notification type text description. For testing purposes.', read: false },
-      { id: 6, type: 'info', icon: 'info-circle', title: 'Notification 6', description: 'This is a info notification type text description. For testing purposes.', read: false },
-      { id: 7, type: 'warning', icon: 'alert-triangle', title: 'Notification 7', description: 'This is a danger notification type text description. For testing purposes.', read: false },
-      { id: 8, type: 'error', icon: 'exclamation-circle', title: 'Notification 8', description: 'This is a error notification type text description. For testing purposes.', read: false },
-      { id: 9, type: 'success', icon: 'circle-check', title: 'Notification 9', description: 'This is a success notification type text description. For testing purposes.', read: false },
-      { id: 10, type: 'info', icon: 'info-circle', title: 'Notification 10', description: 'This is a info notification type text description. For testing purposes.', read: false },
-    ];
-    this.notificationsUnread = this.notificationList.filter(n => !n.read).length;
+    this.loading = true;
+    this.notificationService.fetchAll().subscribe({
+      next: (res) => {
+        this.loading = false;
+        console.log(res.message);
+        this.notificationList = res.data;
+        this.notificationsUnread = this.notificationList.filter(n => !n.read).length;
+      },
+      error: (err: HttpErrorResponse) => {
+        this.loading = false;
+        console.error({ err });
+      }
+    });
   }
 
   getCurrentNotifications(): string {
@@ -74,9 +79,27 @@ export class NavbarComponent implements OnInit {
     this.notificationsClicked = !this.notificationsClicked;
   }
 
-  markNotificationAsRead(noti: any): void {
+  markNotificationAsRead(noti: INavbarNotification): void {
+    if (noti.read) {
+      return;
+    }
+
     noti.read = true;
     this.notificationsUnread = this.notificationList.filter(n => !n.read).length;
+    this.loading = true;
+    this.notificationService.markAsRead(noti.id, noti).subscribe({
+      next: (res) => {
+        this.loading = false;
+        console.log(res.message);
+        this.getNotifications();
+      },
+      error: (err: HttpErrorResponse) => {
+        this.loading = false;
+        console.error({ err });
+        noti.read = false;
+        this.notificationsUnread = this.notificationList.filter(n => !n.read).length;
+      }
+    });
   }
 
   getUserInfo() {

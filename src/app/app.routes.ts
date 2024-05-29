@@ -13,31 +13,31 @@ export const routes: Routes = [
       },
       {
         path: 'housings',
-        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+        loadComponent: () => import('./pages/housing/housing.component').then((c) => c.HousingComponent),
       },
       {
         path: 'rooms',
-        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+        loadComponent: () => import('./pages/room/room.component').then((c) => c.RoomComponent),
       },
       {
         path: 'tenants',
-        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+        loadComponent: () => import('./pages/tenant/tenant.component').then((c) => c.TenantComponent),
       },
       {
         path: 'receipts',
-        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+        loadComponent: () => import('./pages/receipt/receipt.component').then((c) => c.ReceiptComponent),
       },
       {
         path: 'measuring-devices',
-        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+        loadComponent: () => import('./pages/measuring-device/measuring-device.component').then((c) => c.MeasuringDeviceComponent),
       },
       {
         path: 'measuring-device-readings',
-        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+        loadComponent: () => import('./pages/measuring-device-reading/measuring-device-reading.component').then((c) => c.MeasuringDeviceReadingComponent),
       },
       {
         path: 'calculations',
-        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+        loadComponent: () => import('./pages/calculation/calculation.component').then((c) => c.CalculationComponent),
       },
       //? AQUÍ SE DEFINE EL ENRUTAMIENTO DE LOS DISTINTOS COMPONENTES DEL SISTEMA
       {

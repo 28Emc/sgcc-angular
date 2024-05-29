@@ -19,7 +19,7 @@
         class='transition-all duration-300 text-xl text-icon-light dark:text-icon-dark'></i-tabler>
       @if (notificationsUnread > 0) {
       <span class="absolute -top-2 -right-2 min-w-5 min-h-5 flex items-center justify-center text-[0.70rem] px-1 rounded-full
-           bg-red-500 text-typography-light">
+           bg-red-500 text-typography-light animate-jump-in animate-once animate-duration-500 animate-ease-out">
         {{getCurrentNotifications()}}
       </span>
       }
@@ -36,36 +36,42 @@
         <span class="p-3 font-normal text-typography dark:text-typography-dark">Notifications</span>
       </div>
       <hr class="text-typography dark:text-typography-dark">
+      @if (notificationList.length) {
       <div class="max-h-80 overflow-y-auto">
         @for (noti of notificationList; track $index) {
         <a (click)="markNotificationAsRead(noti);" class="block px-4 py-3 transition-all cursor-pointer
-          hover:bg-navbar-dark hover:dark:bg-navbar-light group" [ngClass]="{
-              'rounded-none' : $index > 0,
-              'rounded-b' : $index === notificationList.length - 1
-            }" role="menuitem" tabindex="-1">
+            hover:bg-navbar-dark hover:dark:bg-navbar-light group" [ngClass]="{
+                'rounded-none' : $index > 0,
+                'rounded-b' : $index === notificationList.length - 1
+              }" role="menuitem" tabindex="-1">
           <div class="flex items-center justify-center gap-3">
             <i-tabler [name]="noti.icon" class='transition-all min-w-[35px] text-[25px]' [ngClass]="{
-                        'text-green-400' : noti.type === 'success',
-                        'text-sky-400' : noti.type === 'info',
-                        'text-orange-400' : noti.type === 'warning',
-                        'text-red-400' : noti.type === 'error',
-                        'text-icon-light dark:text-icon-dark opacity-40' : noti.read,
-                      }"></i-tabler>
+                          'text-green-400' : noti.type === 'success',
+                          'text-sky-400' : noti.type === 'info',
+                          'text-orange-400' : noti.type === 'warning',
+                          'text-red-400' : noti.type === 'error',
+                          'text-icon-light dark:text-icon-dark opacity-40' : noti.read,
+                        }"></i-tabler>
             <div class="flex flex-col items-start">
               <span
                 class="text-sm font-semibold text-typography group-hover:text-typography-light dark:text-typography-dark group-hover:dark:text-typography"
                 [ngClass]="{
-                          'opacity-40': noti.read
-                        }">{{noti.title}}</span>
+                            'opacity-40': noti.read
+                          }">{{noti.title}}</span>
               <p class="text-sm text-typography group-hover:text-typography-light dark:text-typography-dark group-hover:dark:text-typography"
                 [ngClass]="{
-                          'opacity-40': noti.read
-                        }">{{noti.description}}</p>
+                            'opacity-40': noti.read
+                          }">{{noti.description}}</p>
             </div>
           </div>
         </a>
         }
       </div>
+      } @else {
+      <div class="flex flex-col items-center">
+        <p class="px-3 py-5 font-light text-base text-typography dark:text-typography-dark">Aquí se mostrarán las notificaciones.</p>
+      </div>
+      }
     </div>
 
     <a id="nav-user-btn" (click)="onUserAvatarClicked($event)" class="flex gap-3 cursor-pointer">
