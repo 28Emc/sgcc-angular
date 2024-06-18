@@ -32,6 +32,14 @@ export class SecurityService {
     return this.secureStorage.get(key);
   }
 
+  removeKey(key: string): any {
+    return this.secureStorage.remove(key);
+  }
+
+  clear(): void {
+    this.secureStorage.clear();
+  }
+
   refreshToken(): Observable<any> {
     return this.http.post(`${this.baseURL}/auth/jwt/refresh`, null)
       .pipe(

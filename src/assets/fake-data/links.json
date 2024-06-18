@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "parentId": 0,
+    "type": "link",
+    "name": "Inicio",
+    "displayName": "Inicio",
+    "icon": "layout-dashboard",
+    "url": "/dashboard"
+  },
+  {
+    "id": 2,
+    "parentId": 0,
+    "type": "title",
+    "name": "Catálogo",
+    "displayName": "Catálogo",
+    "icon": null,
+    "url": null
+  },
+  {
+    "id": 3,
+    "parentId": 2,
+    "type": "link",
+    "name": "Edificios",
+    "displayName": "Edificios",
+    "icon": "building",
+    "url": "/housings"
+  },
+  {
+    "id": 4,
+    "parentId": 2,
+    "type": "link",
+    "name": "Departamentos",
+    "displayName": "Departamentos",
+    "icon": "door",
+    "url": "/rooms"
+  },
+  {
+    "id": 5,
+    "parentId": 2,
+    "type": "link",
+    "name": "Inquilinos",
+    "displayName": "Inquilinos",
+    "icon": "users-group",
+    "url": "/tenants"
+  },
+  {
+    "id": 6,
+    "parentId": 2,
+    "type": "link",
+    "name": "Recibos",
+    "displayName": "Recibos",
+    "icon": "receipt-2",
+    "url": "/receipts"
+  },
+  {
+    "id": 7,
+    "parentId": 2,
+    "type": "link",
+    "name": "Medidores",
+    "displayName": "Medidores",
+    "icon": "devices-search",
+    "url": "/measuring-devices"
+  },
+  {
+    "id": 8,
+    "parentId": 2,
+    "type": "link",
+    "name": "Lecturas",
+    "displayName": "Lecturas",
+    "icon": "number-123",
+    "url": "/measuring-device-readings"
+  },
+  {
+    "id": 9,
+    "parentId": 0,
+    "type": "title",
+    "name": "Operaciones",
+    "displayName": "Operaciones",
+    "icon": null,
+    "url": null
+  },
+  {
+    "id": 10,
+    "parentId": 9,
+    "type": "link",
+    "name": "Cálculos",
+    "displayName": "Cálculos",
+    "icon": "calculator",
+    "url": "/calculations"
+  }
+]

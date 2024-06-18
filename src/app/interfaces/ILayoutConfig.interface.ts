@@ -61,8 +61,8 @@ export class Sidebar implements ISidebar {
 }
 
 export interface ILink {
-  id?: number;
-  parentId?: number;
+  id: number;
+  parentId: number;
   type: LinkType;
   name: string;
   icon?: string;
@@ -73,8 +73,8 @@ export interface ILink {
 export type LinkType = 'title' | 'dropdown' | 'link';
 
 export class Link implements ILink {
-  id?: number;
-  parentId?: number;
+  id: number = 0;
+  parentId: number = 0;
   type: LinkType = 'link';
   name: string = '';
   displayName: string = '';
@@ -86,17 +86,19 @@ export class Link implements ILink {
 }
 
 export class TitleLink implements ILink {
-  id?: number;
-  parentId?: number;
+  id: number = 0;
+  parentId: number = 0;
   type: LinkType = 'title';
   name: string = '';
   displayName: string = '';
-  children?: DropdownLink[] | DefaultLink[] = [];
+  children?: MixedLink[] = [];
 }
 
+export type MixedLink = DropdownLink | DefaultLink;
+
 export class DropdownLink implements ILink {
-  id?: number;
-  parentId?: number;
+  id: number = 0;
+  parentId: number = 0;
   type: LinkType = 'dropdown';
   name: string = '';
   displayName: string = '';
@@ -107,8 +109,8 @@ export class DropdownLink implements ILink {
 }
 
 export class DefaultLink implements ILink {
-  id?: number;
-  parentId?: number;
+  id: number = 0;
+  parentId: number = 0;
   type: LinkType = 'link';
   name: string = '';
   displayName: string = '';

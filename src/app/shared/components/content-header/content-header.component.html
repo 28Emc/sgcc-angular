@@ -1,10 +1,13 @@
-<div class="flex flex-row items-center gap-4 py-2 transition-all duration-300">
-  <h1 class="font-normal text-2xl transition-all duration-300 text-typography dark:text-typography-dark">
-    {{contentHeaderTitle}}</h1>
+<div class="flex sm:flex-row flex-col sm:items-center items-start sm:gap-4 gap-0 py-2 transition-all duration-300">
+  <h1 class="font-normal sm:text-2xl text-xl transition-all duration-300 text-typography dark:text-typography-dark">
+    {{contentHeaderTitle}}
+  </h1>
 
-  <div class="h-5 border-r border-r-icon-light dark:border-r-typography-dark sm:block hidden"></div>
+  @if (breadcumbItems.length > 1) { <div
+    class="h-5 border-r border-r-icon-light dark:border-r-typography-dark sm:block hidden">
+  </div>
 
-  <div class="sm:flex sm:flex-row hidden">
+  <div class="flex flex-row">
     <ol class="flex py-1 list-none rounded-none">
       @for (item of breadcumbItems; track $index) {
       <li class="flex items-center text-typography dark:text-typography-dark">
@@ -12,11 +15,14 @@
         <i-tabler name="chevron-right"
           class='custom-header-icon font-light mx-1 text-icon-light dark:text-icon-dark'></i-tabler>
         }
-        <span class="text-base" [ngClass]="{
-          'text-primary': $index >= 0 && $index < breadcumbItems.length - 1
-        }">{{item}}</span>
+        <span class="sm:text-base text-sm" [ngClass]="{
+            'text-primary': $index >= 0 && $index < breadcumbItems.length - 1
+          }">
+          {{item}}
+        </span>
       </li>
       }
     </ol>
   </div>
+  }
 </div>

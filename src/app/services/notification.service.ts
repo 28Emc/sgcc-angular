@@ -3,7 +3,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable, asyncScheduler, delay, map, scheduled } from 'rxjs';
 import { INavbarNotification } from '../interfaces/INavbarNotification.interface';
-import { IAPIResponse } from '../interfaces/APIResponse.interface';
+import { IAPIResponse } from '../interfaces/IAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
