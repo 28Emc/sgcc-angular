@@ -67,7 +67,7 @@
 <li class="list-none my-2">
   <a class="flex rounded-lg items-center py-2.5 px-1.5 no-underline transition-all duration-200 cursor-pointer gap-2.5 group
    {{customCss.join('')}}" [ngClass]="{
-    'bg-primary dark:bg-primary shadow-md shadow-primary' : isActiveRoute(link.url!),
+    'bg-primary dark:bg-primary' : isActiveRoute(link.url!),
     'bg-sidebar-light dark:bg-sidebar-dark' : !isActiveRoute(link.url!)
   }" [routerLink]="link.url">
     @if (showIcon) {

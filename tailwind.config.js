@@ -2,6 +2,7 @@
 module.exports = {
   content: [
     "./src/**/*.{html,ts}",
+    "./node_modules/flowbite/**/*.js"
   ],
   presets: [],
   // darkMode: 'media', // or 'class'
@@ -168,39 +169,57 @@ module.exports = {
         'dark': colors.orange[800]
       },
       'body': {
-        'light': '#F7F7F7',
-        'dark': '#0F172A'
+        'light': colors.gray[50],
+        'dark': colors.gray[900]
       },
       'navbar': {
-        'light': '#FFFFFF',
-        'semi-light': '#CBD5E1',
-        'semi-dark': '#1F2937',
-        'dark': '#283046'
+        'light': colors.white,
+        'semi-light': colors.gray[300],
+        'semi-dark': colors.gray[600],
+        'dark': colors.gray[800]
       },
       'sidebar': {
-        'light': '#FFFFFF',
-        'semi-light': '#CBD5E1',
-        DEFAULT: '#B0C0D6',
-        'semi-dark': '#1F2937',
-        'dark': '#283046'
+        'light': colors.white,
+        'semi-light': colors.gray[300],
+        'semi-dark': colors.gray[600],
+        'dark': colors.gray[800]
+      },
+      'table': {
+        'light': colors.white,
+        'semi-light': colors.gray[300],
+        'semi-dark': colors.gray[600],
+        'dark': colors.gray[800]
+      },
+      'input': {
+        'light': colors.gray[50],
+        'semi-light': colors.gray[300],
+        DEFAULT: colors.gray[500],
+        'semi-dark': colors.gray[700],
+        'dark': colors.gray[800]
+      },
+      'button': {
+        'primary-light': colors.orange[500],
+        'primary-dark': colors.orange[500],
+        'secondary-light': colors.transparent,
+        'secondary-dark': colors.transparent,
+        'secondary-light-border': colors.gray[300],
+        'secondary-dark-border': colors.gray[500],
+        'secondary-light-hover': colors.gray[100],
+        'secondary-dark-hover': colors.gray[600]
       },
       'content': {
-        'light': '#FFF',
-        'dark': '#283046'
-      },
-      'title': {
-        'light': '#707070',
-        'dark': '#CCC'
+        'light': colors.white,
+        'dark': colors.gray[800]
       },
       'typography': {
-        'light': '#F6F5FF',
-        DEFAULT: '#2F2F2F',
-        'dark': '#CCC'
+        'light': colors.gray[50],
+        DEFAULT: colors.gray[600],
+        'dark': colors.gray[300]
       },
       'icon': {
-        'light': '#625F6E',
-        DEFAULT: '#F6F5FF',
-        'dark': '#CCC'
+        'light': colors.gray[600],
+        DEFAULT: colors.gray[50],
+        'dark': colors.gray[300]
       },
     }),
     columns: {
@@ -1104,6 +1123,7 @@ module.exports = {
     },
   },
   plugins: [
+    require('flowbite/plugin'),
     require('tailwindcss-animated')
   ],
 }
