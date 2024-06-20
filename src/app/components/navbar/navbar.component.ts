@@ -57,7 +57,6 @@ export class NavbarComponent implements OnInit {
     this.notificationService.fetchAll().subscribe({
       next: (res) => {
         this.loading = false;
-        console.log(res.message);
         this.notificationList = res.data;
         this.notificationsUnread = this.notificationList.filter(n => !n.read).length;
       },
@@ -90,7 +89,6 @@ export class NavbarComponent implements OnInit {
     this.notificationService.markAsRead(noti.id, noti).subscribe({
       next: (res) => {
         this.loading = false;
-        console.log(res.message);
         this.getNotifications();
       },
       error: (err: HttpErrorResponse) => {

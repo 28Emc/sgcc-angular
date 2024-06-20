@@ -34,3 +34,26 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* Table button */
+i-tabler.table-icon, i-tabler.button-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+i-tabler.table-icon-sm {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

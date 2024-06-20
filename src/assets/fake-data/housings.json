@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "address": "Av. Lima 123",
+    "status": 1,
+    "status_dsc": "Activo"
+  },
+  {
+    "id": 2,
+    "address": "Av. Lima 456",
+    "status": 1,
+    "status_dsc": "Activo"
+  },
+  {
+    "id": 3,
+    "address": "Av. Lima 789",
+    "status": 1,
+    "status_dsc": "Activo"
+  },
+  {
+    "id": 4,
+    "address": "Av. Arequipa 123",
+    "status": 1,
+    "status_dsc": "Activo"
+  },
+  {
+    "id": 5,
+    "address": "Av. Arequipa 456",
+    "status": 1,
+    "status_dsc": "Activo"
+  },
+  {
+    "id": 6,
+    "address": "Av. Arequipa 789",
+    "status": 1,
+    "status_dsc": "Activo"
+  },
+  {
+    "id": 7,
+    "address": "Av. Puno 123",
+    "status": 1,
+    "status_dsc": "Activo"
+  },
+  {
+    "id": 8,
+    "address": "Av. Puno 456",
+    "status": 1,
+    "status_dsc": "Activo"
+  },
+  {
+    "id": 9,
+    "address": "Av. Puno 789",
+    "status": 1,
+    "status_dsc": "Activo"
+  },
+  {
+    "id": 10,
+    "address": "Av. Iquitos 123",
+    "status": 1,
+    "status_dsc": "Activo"
+  }
+]

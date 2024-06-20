@@ -1,0 +1,138 @@
+<section class="py-3 sm:py-5">
+  <div class="relative shadow-md rounded overflow-hidden bg-table-light dark:bg-table-dark transition">
+
+    <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+
+      <div class="w-full md:w-1/2">
+        <form class="flex items-center">
+          <label for="simple-search" class="sr-only">Buscar</label>
+          <div class="relative w-full">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <i-tabler name="search" class='button-icon text-icon-light dark:text-icon-dark transition'></i-tabler>
+            </div>
+            <input type="text" id="simple-search" [formControl]="searchControl"
+              class="text-sm rounded-lg block w-full pl-10 p-2 border bg-input-light border-input-semi-light text-input-dark focus:ring-input focus:border-input dark:bg-input-semi-dark dark:placeholder-input-semi-light dark:text-input-light dark:border-input dark:focus:ring-input-semi-light dark:focus:border-input-semi-light transition"
+              placeholder="Buscar...">
+          </div>
+        </form>
+      </div>
+
+      <div
+        class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+        @if (addButtonText) {
+        <button type="button" (click)="onAddBtnClicked()"
+          class="flex items-center justify-center gap-1 font-medium rounded-lg text-sm px-4 py-2 text-typography-light bg-button-primary-light dark:bg-button-primary-dark transition">
+          <i-tabler name="plus" class='button-icon text-icon dark:text-icon transition'></i-tabler>
+          <span>{{addButtonText}}</span>
+        </button>
+        }
+
+        @if (headerActions?.length) {
+        <div class="flex items-center space-x-3 w-full md:w-auto">
+          <button id="filterButton"
+            class="w-full md:w-auto flex items-center justify-between gap-1 py-2 px-4 text-sm font-medium rounded-lg border text-icon-light bg-button-secondary-light border-button-secondary-light-border hover:bg-button-secondary-light-hover dark:bg-button-secondary-dark dark:text-icon-dark dark:border-button-secondary-dark-border dark:hover:bg-button-secondary-dark-hover transition"
+            type="button" (click)="onFilterBtnClicked()">
+            <i-tabler name="filter" class='button-icon text-icon-light dark:text-icon-dark transition'></i-tabler>
+            <span>Filtrar por</span>
+          </button>
+
+          @if (hasHeaderActions()) {
+          <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown"
+            class="w-full md:w-auto flex items-center justify-between gap-1 py-2 px-4 text-sm font-medium rounded-lg border text-icon-light bg-button-secondary-light border-button-secondary-light-border hover:bg-button-secondary-light-hover dark:bg-button-secondary-dark dark:text-icon-dark dark:border-button-secondary-dark-border dark:hover:bg-button-secondary-dark-hover transition"
+            type="button">
+            <span>Acciones</span>
+            <i-tabler name="chevron-down" class='button-icon text-icon-light dark:text-icon-dark transition'></i-tabler>
+          </button>
+          <div id="actionsDropdown"
+            class="hidden z-10 w-52 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="actionsDropdownButton">
+              @for (action of headerActions; track $index) {
+              <li>
+                <button type="button" (click)="onExportBtnClicked(action.type)"
+                  class="flex justify-start items-center gap-1 py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                  <i-tabler [name]="action.icon!"
+                    class='button-icon text-icon-light dark:text-icon-dark transition'></i-tabler>
+                  <span>{{action.text}}</span>
+                </button>
+              </li>
+              }
+            </ul>
+          </div>
+          }
+        </div>
+        }
+      </div>
+
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            @for (column of visibleColumns; track $index) {
+            <th scope="col" class="px-4 py-3 cursor-pointer select-none" (click)="onSortByClicked(column)"
+              (keyup)="null">
+              <div class="flex items-center gap-1">
+                <span>{{column.label}}</span>
+                @if (sortStatus === 1 && this.sortedColumn === column.property) {
+                <i-tabler name="arrow-narrow-up"
+                  class='table-icon-sm text-icon-light dark:text-icon-dark transition'></i-tabler>
+                }
+                @if (sortStatus === 2 && this.sortedColumn === column.property) {
+                <i-tabler name="arrow-narrow-down"
+                  class='table-icon-sm text-icon-light dark:text-icon-dark transition'></i-tabler>
+                }
+              </div>
+            </th>
+            }
+            @if (rowActions?.length) {
+            <th scope="col" class="px-4 py-3">
+              <div class="flex items-center justify-end">
+                <span class="sr-only">Acciones</span>
+              </div>
+            </th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of trackByVisibleColumns(pageOfItems); track $index) {
+          <tr class="border-b dark:border-gray-700">
+            @for (el of getValuesFromObject(row); track $index) {
+            <td class="px-4 py-3">
+              {{el}}
+            </td>
+            }
+            @if (rowActions?.length) {
+            <td class="px-4 py-3 flex items-center sm:justify-end justify-center">
+              <button [attr.data-dropdown-toggle]="$index"
+                class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
+                type="button">
+                <i-tabler name="dots" class='table-icon text-icon-light dark:text-icon-dark transition'></i-tabler>
+              </button>
+              <div [id]="$index"
+                class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                  @for (action of rowActions; track $index) {
+                  <li>
+                    <a href="/housings"
+                      class="flex justify-start items-center gap-2 py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <i-tabler [name]="action.icon!"
+                        class='text-xl text-icon-light dark:text-icon-dark transition'></i-tabler>
+                      {{action.text}}
+                    </a>
+                  </li>
+                  }
+                </ul>
+              </div>
+            </td>
+            }
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <app-paginator [items]="datasource" [pageSizes]="pageSizes" (changePage)="onPageChanged($event)"></app-paginator>
+
+  </div>
+</section>

@@ -14,15 +14,15 @@ export class LayoutService {
   private _flatArray: Link[] = [];
 
   constructor() {
-    if (this.securityService.getItem('config')) {
-      this.configS.set(this.securityService.getItem('config') as LayoutConfig);
+    if (this.securityService.getItem('sgcc-config')) {
+      this.configS.set(this.securityService.getItem('sgcc-config') as LayoutConfig);
     } else {
       this.persistConfig(this.config);
     }
   }
 
   persistConfig(config: LayoutConfig): void {
-    this.securityService.setItem('config', config);
+    this.securityService.setItem('sgcc-config', config);
   }
 
   rawToGroupedLinks(rawLinks: any[]): Link[] {

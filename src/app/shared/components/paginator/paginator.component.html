@@ -1,0 +1,67 @@
+<nav class="flex flex-col md:flex-row justify-between sm:items-start items-center space-y-3 md:space-y-0 p-4"
+  aria-label="Table navigation">
+
+  <div class="flex items-center justify-center gap-2">
+    <span class="text-sm font-normal text-typography dark:text-typography-dark">
+      Elementos por página
+    </span>
+
+    <select id="pageSizes" (change)="setPageSize($event)"
+      class="cursor-pointer border text-sm rounded-lg py-2 text-icon-light bg-button-secondary-light border-button-secondary-light-border hover:bg-button-secondary-light-hover dark:bg-button-secondary-dark dark:text-icon-dark dark:border-button-secondary-dark-border dark:hover:bg-button-secondary-dark-hover transition">
+      @for (p of pageSizes; track $index) {
+      <option [value]="p"
+        class="text-icon-light bg-button-secondary-light border-button-secondary-light-border hover:bg-button-secondary-light-hover dark:bg-button-secondary-dark dark:text-icon-dark dark:border-button-secondary-dark-border dark:hover:bg-button-secondary-dark-hover transition">
+        {{p}}
+      </option>
+      }
+    </select>
+  </div>
+
+  @if (pager && pager.pages.length) {
+  <ul class="inline-flex items-stretch -space-x-px">
+    <li>
+      <button type="button" (click)="setPage(1)" [disabled]="pager.currentPage === 1"
+        [ngClass]="{'pointer-events-none': pager.currentPage === 1}"
+        class="flex items-center justify-center h-full py-1.5 px-3 ml-0 rounded-l-lg border text-icon-light bg-button-secondary-light border-button-secondary-light-border hover:bg-button-secondary-light-hover dark:bg-button-secondary-dark dark:text-icon-dark dark:border-button-secondary-dark-border dark:hover:bg-button-secondary-dark-hover transition">
+        <i-tabler name="chevrons-left" class="button-icon text-icon-light dark:text-icon-dark transition"></i-tabler>
+        <span class="sr-only">Primero</span>
+      </button>
+    </li>
+    <li>
+      <button type="button" (click)="setPage(pager.currentPage - 1)" [disabled]="pager.currentPage === 1"
+        [ngClass]="{'pointer-events-none': pager.currentPage === 1}"
+        class="flex items-center justify-center text-sm py-2 px-3 leading-tight border text-icon-light bg-button-secondary-light border-button-secondary-light-border hover:bg-button-secondary-light-hover dark:bg-button-secondary-dark dark:text-icon-dark dark:border-button-secondary-dark-border dark:hover:bg-button-secondary-dark-hover transition">
+        <i-tabler name="chevron-left" class="button-icon text-icon-light dark:text-icon-dark transition"></i-tabler>
+        <span class="sr-only">Anterior</span>
+      </button>
+    </li>
+    @for (page of pager.pages; track $index) {
+    <li>
+      <button type="button" (click)="setPage(page)" [ngClass]="{
+          'text-icon bg-button-primary-light hover:bg-button-primary-light dark:bg-button-primary-dark dark:text-icon-dark dark:hover:bg-button-primary-dark': pager.currentPage === page,
+          'text-icon-light bg-button-secondary-light border-button-secondary-light-border hover:bg-button-secondary-light-hover dark:bg-button-secondary-dark dark:text-icon-dark dark:border-button-secondary-dark-border dark:hover:bg-button-secondary-dark-hover': pager.currentPage !== page
+           }" class="flex items-center justify-center py-2 px-3 leading-tight border transition">
+        {{page}}
+      </button>
+    </li>
+    }
+    <li>
+      <button type="button" (click)="setPage(pager.currentPage + 1)" [disabled]="pager.currentPage === pager.totalPages"
+        [ngClass]="{'pointer-events-none': pager.currentPage === pager.totalPages}"
+        class="flex items-center justify-center text-sm py-2 px-3 leading-tight border text-icon-light bg-button-secondary-light border-button-secondary-light-border hover:bg-button-secondary-light-hover dark:bg-button-secondary-dark dark:text-icon-dark dark:border-button-secondary-dark-border dark:hover:bg-button-secondary-dark-hover transition">
+        <span class="sr-only">Siguiente</span>
+        <i-tabler name="chevron-right" class="button-icon text-icon-light dark:text-icon-dark transition"></i-tabler>
+      </button>
+    </li>
+    <li>
+      <button type="button" (click)="setPage(pager.totalPages)" [disabled]="pager.currentPage === pager.totalPages"
+        [ngClass]="{'pointer-events-none': pager.currentPage === pager.totalPages}"
+        class="flex items-center justify-center h-full py-1.5 px-3 leading-tight rounded-r-lg border text-icon-light bg-button-secondary-light border-button-secondary-light-border hover:bg-button-secondary-light-hover dark:bg-button-secondary-dark dark:text-icon-dark dark:border-button-secondary-dark-border dark:hover:bg-button-secondary-dark-hover transition">
+        <span class="sr-only">Último</span>
+        <i-tabler name="chevrons-right" class="button-icon text-icon-light dark:text-icon-dark transition"></i-tabler>
+      </button>
+    </li>
+  </ul>
+  }
+
+</nav>
